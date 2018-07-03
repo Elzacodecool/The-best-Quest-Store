@@ -1,0 +1,83 @@
+CREATE TABLE User (
+    login VARCHAR(20) PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    email VARCHAR(40),
+    type VARCHAR(9)
+);
+
+CREATE TABLE Mentor (
+    id SERIAL PRIMARY KEY,
+    user_login VARCHAR(20),
+    class_id INTEGER
+);
+
+CREATE TABLE Codecooler (
+    id SERIAL PRIMARY KEY,
+    user_login VARCHAR(20),
+    wallet INTEGER DEFAULT 0,
+    class_id INTEGER,
+    level_id INTEGER
+);
+
+CREATE TABLE Class (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20)
+);
+
+CREATE TABLE Mentor_class (
+    mentor_id SERIAL FOREIGN KEY,
+    class_id SERIAL FOREIGN KEY
+);
+
+CREATE TABLE Level (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20),
+    min_coolcoins INTEGER
+);
+
+CREATE TABLE Artifact (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20),
+    description VARCHAR(100),
+    price INTEGER,
+    category VARCHAR(20)
+);
+
+CREATE TABLE Codecooler_articact (
+    id SERIAL PRIMARY KEY,
+    codecooler_id INTEGER REFERENCES Codecooler(id),
+    artifact_id INTEGER REFERENCES Artifact(id),
+    purchase_date DATETIME,
+    use_date DATETIME
+);
+
+CREATE TABLE Quest (
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(100),
+    value INTEGER,
+    category VARCHAR(20)
+);
+
+CREATE TABLE Codecooler_quest (
+    id SERIAL PRIMARY KEY,
+    codecooler_id INTEGER REFERENCES Codecooler(id),
+    quest_id INTEGER REFERENCES Quest(id),
+    mark_date DATETIME
+);
+
+CREATE TABLE Group (
+    id SERIAL PRIMARY KEY,
+    artefact_id INTEGER,
+    leader_id INTEGER,
+    status VARCHAR(10) DEFAULT 'Pending'
+);
+
+CREATE TABLE Codecooler_group (
+    codecooler_id INTEGER REFERENCES Codecooler(id),
+    group_id INTEGER REFERENCES Group(id),
+    coolcoins INTEGER
+);
+
+
+
