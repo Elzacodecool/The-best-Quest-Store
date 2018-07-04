@@ -1,4 +1,6 @@
-CREATE TABLE User (
+CREATE DATABASE queststore;
+
+CREATE TABLE User_ (
     login VARCHAR(20) PRIMARY KEY,
     first_name VARCHAR(20),
     last_name VARCHAR(20),
@@ -8,32 +10,31 @@ CREATE TABLE User (
 
 CREATE TABLE Mentor (
     id SERIAL PRIMARY KEY,
-    user_login VARCHAR(20),
-    class_id INTEGER
+    user_login VARCHAR(20) REFERENCES User_(login)
 );
 
-CREATE TABLE Codecooler (
-    id SERIAL PRIMARY KEY,
-    user_login VARCHAR(20),
-    wallet INTEGER DEFAULT 0,
-    class_id INTEGER,
-    level_id INTEGER
-);
-
-CREATE TABLE Class (
+CREATE TABLE Class_ (
     id SERIAL PRIMARY KEY,
     name VARCHAR(20)
 );
 
 CREATE TABLE Mentor_class (
-    mentor_id SERIAL FOREIGN KEY,
-    class_id SERIAL FOREIGN KEY
+    mentor_id INTEGER REFERENCES Mentor(id),
+    class_id INTEGER REFERENCES Class_(id)
 );
 
-CREATE TABLE Level (
+CREATE TABLE Level_ (
     id SERIAL PRIMARY KEY,
     name VARCHAR(20),
     min_coolcoins INTEGER
+);
+
+CREATE TABLE Codecooler (
+    id SERIAL PRIMARY KEY,
+    user_login VARCHAR(20) REFERENCES User_(login),
+    class_id INTEGER REFERENCES Class_(id),
+    level_id INTEGER REFERENCES Level_(id),
+    wallet INTEGER DEFAULT 0
 );
 
 CREATE TABLE Artifact (
@@ -48,12 +49,13 @@ CREATE TABLE Codecooler_articact (
     id SERIAL PRIMARY KEY,
     codecooler_id INTEGER REFERENCES Codecooler(id),
     artifact_id INTEGER REFERENCES Artifact(id),
-    purchase_date DATETIME,
-    use_date DATETIME
+    purchase_date TIMESTAMP,
+    use_date TIMESTAMP
 );
 
 CREATE TABLE Quest (
     id SERIAL PRIMARY KEY,
+    name VARCHAR(20),
     description VARCHAR(100),
     value INTEGER,
     category VARCHAR(20)
@@ -63,21 +65,18 @@ CREATE TABLE Codecooler_quest (
     id SERIAL PRIMARY KEY,
     codecooler_id INTEGER REFERENCES Codecooler(id),
     quest_id INTEGER REFERENCES Quest(id),
-    mark_date DATETIME
+    mark_date TIMESTAMP
 );
 
-CREATE TABLE Group (
+CREATE TABLE Team (
     id SERIAL PRIMARY KEY,
-    artefact_id INTEGER,
-    leader_id INTEGER,
+    artefact_id INTEGER REFERENCES Artifact(id),
+    leader_id INTEGER REFERENCES Codecooler(id),
     status VARCHAR(10) DEFAULT 'Pending'
 );
 
-CREATE TABLE Codecooler_group (
+CREATE TABLE Codecooler_team (
     codecooler_id INTEGER REFERENCES Codecooler(id),
-    group_id INTEGER REFERENCES Group(id),
+    group_id INTEGER REFERENCES Team(id),
     coolcoins INTEGER
 );
-
-
-
