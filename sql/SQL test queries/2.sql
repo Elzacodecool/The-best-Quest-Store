@@ -1,12 +1,11 @@
-BEGIN TRANSACTION;
 
 INSERT INTO class 
 	(name)
-VALUES ('sample class name');
+VALUES ('sample name');
 
-UPDATE mentor
-SET class_id = 'created class id'
-WHERE first_name = 'mentor name'
-AND last_name = 'mentor surname';
 
-COMMIT;
+
+INSERT INTO mentor_class
+	(mentor_id, class_id)
+VALUES (mentor_id,
+	class_id);
