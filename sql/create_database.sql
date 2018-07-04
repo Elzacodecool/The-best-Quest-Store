@@ -77,6 +77,6 @@ CREATE TABLE Team (
 
 CREATE TABLE Codecooler_team (
     codecooler_id INTEGER REFERENCES Codecooler(id),
-    group_id INTEGER REFERENCES Team(id),
+    team_id INTEGER REFERENCES Team(id),
     coolcoins INTEGER
 );
