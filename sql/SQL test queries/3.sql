@@ -1,11 +1,13 @@
-UPDATE mentor
-SET email = 'updated email'
-WHERE first_name = 'mentor name'
-AND last_name = 'mentor surname';
+UPDATE user_
+SET    email = 'new_email'
+FROM   mentor
+WHERE  user_.login = mentor.user_login
+       AND first_name = 'Dominik'
+       AND last_name = 'Starzyk';
 
 
+UPDATE mentor_class
+SET mentor_id = selected_mentor_id
+WHERE class_id = selected_class_id;
 
-UPDATE mentor
-SET class_id = 'updated class_id'
-WHERE first_name = 'mentor name'
-AND last_name = 'mentor surname';
+
