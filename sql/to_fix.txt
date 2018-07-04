@@ -1,0 +1,3 @@
+1. change column names in all tables from 'name' to '_name'. (not important)
+2. auto - setting id in 'class_' table (6 after 2)
+3. CODECOOLER ARTIFACT - set use date to null at the begining
