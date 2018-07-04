@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-INSERT INTO user 
+INSERT INTO user_
 (login, first_name, last_name, email, type)
 VALUES ('sample login',
 	'sample name', 
