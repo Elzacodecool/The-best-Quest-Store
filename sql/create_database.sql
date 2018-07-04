@@ -5,7 +5,7 @@ CREATE TABLE User_ (
     first_name VARCHAR(20),
     last_name VARCHAR(20),
     email VARCHAR(40),
-    type VARCHAR(9)
+    type VARCHAR(10)
 );
 
 CREATE TABLE Mentor (
@@ -37,15 +37,15 @@ CREATE TABLE Codecooler (
     wallet INTEGER DEFAULT 0
 );
 
-CREATE TABLE Artifact (
+CREATE TABLE Artifact (  
     id SERIAL PRIMARY KEY,
-    name VARCHAR(20),
-    description VARCHAR(100),
+    name VARCHAR(40),
+    description VARCHAR(200),
     price INTEGER,
     category VARCHAR(20)
 );
 
-CREATE TABLE Codecooler_articact (
+CREATE TABLE Codecooler_artifact (
     id SERIAL PRIMARY KEY,
     codecooler_id INTEGER REFERENCES Codecooler(id),
     artifact_id INTEGER REFERENCES Artifact(id),
@@ -55,8 +55,8 @@ CREATE TABLE Codecooler_articact (
 
 CREATE TABLE Quest (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(20),
-    description VARCHAR(100),
+    name VARCHAR(40),
+    description VARCHAR(200),
     value INTEGER,
     category VARCHAR(20)
 );
