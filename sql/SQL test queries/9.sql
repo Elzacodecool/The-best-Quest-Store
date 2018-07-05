@@ -1,5 +1,5 @@
 INSERT INTO artifact
-	(name, description, price, category)
+	(artifact_name, description, cost, category)
 VALUES ('sample name',
 	'sample description',
 	300,

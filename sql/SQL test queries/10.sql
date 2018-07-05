@@ -1,3 +1,3 @@
 UPDATE artifact
-SET price = new_price
+SET cost = new_cost
 WHERE id = selected_artifact_id;

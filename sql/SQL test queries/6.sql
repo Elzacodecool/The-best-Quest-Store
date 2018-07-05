@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
-INSERT INTO user_
-	(login, first_name, last_name, email, type)
+INSERT INTO appuser
+	(login, first_name, last_name, email, appuser_type)
 VALUES (
 	'specified login',
 	'sample first name',
@@ -11,7 +11,7 @@ VALUES (
 
 
 INSERT INTO codecooler
-	(user_login, class_id, level_id)
+	(appuser_login, classroom_id, degree_id)
 VALUES (
 	'same specified login',
 	'sample class id',
@@ -22,6 +22,6 @@ COMMIT;
 
 
 
-select * from user_
+select * from appuser
 join codecooler
-ON user_.login = codecooler.user_login;
+ON appuser.login = codecooler.appuser_login;
