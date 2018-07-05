@@ -1,6 +1,6 @@
 INSERT INTO quest
-	(name, description, value, category)
+	(quest_name, description, prize, category)
 VALUES ('sample name',
 	'sample description',
-	sample value,
+	sample prize,
 	'sample category');

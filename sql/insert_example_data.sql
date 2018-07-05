@@ -8,16 +8,19 @@ VALUES
 INSERT INTO Degree
 (degree_name, min_coolcoins)
 VALUES
-('python_degree', 200),
-('java_degree', 400);
+('beginner', 200),
+('master', 400),
+('expert', 800),
+('jez', 2000);
 
 INSERT INTO Appuser
 (login, first_name, last_name, email, appuser_type)
 VALUES
 ('adamszmidt', 'adam', 'szmidt', 'aszmidt92@gmail.com', 'codecooler'),
 ('marekgrzybek', 'marek', 'grzybek', 'marekg@gmail.com', 'mentor'),
-('przemyslawpolczak', 'przemyslaw', 'polczak', 'przemyslaw.polczak@gmail.com', 'codecooler');
-COMMIT;
+('przemyslawpolczak', 'przemyslaw', 'polczak', 'przemyslaw.polczak@gmail.com', 'codecooler'),
+('jerzyjerzowski', 'jerzy', 'jerzowski', 'jez123@gmail.com', 'admin');
+
 END TRANSACTION;
 
 
@@ -48,7 +51,6 @@ VALUES
 ('Summon Code Elemental','Mentor joins a students'' team for a one hour', 1000, 'T'),
 ('Circle of Sorcery', '60 min workshop by a mentor(s) of the chosen topic', 1000, 'T');
 
-COMMIT;
 END TRANSACTION;
 
 BEGIN TRANSACTION;
@@ -63,7 +65,7 @@ VALUES
 ('Exploring a dungeon', 'Finishing a Teamwork week', 100, 'Basic'),
 ('Solving the magic puzzle', 'Finishing an SI assignment', 100, 'Basic'),
 ('Spot trap', 'Spot a major mistake in the assignment', 50, 'Extra');
-COMMIT;
+
 END TRANSACTION;
 
 
@@ -77,7 +79,6 @@ INSERT INTO Team
 (artefact_id, leader_id)
 VALUES
 (1, 1);
-COMMIT;
 END TRANSACTION;
 
 
@@ -87,16 +88,4 @@ INSERT INTO Codecooler_team
 VALUES
 (1,1, 100);
 
-COMMIT;
 END TRANSACTION;
-
-
-
-
-
-
-
-
-
-
-
