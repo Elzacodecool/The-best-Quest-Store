@@ -1,82 +1,82 @@
 CREATE DATABASE queststore;
 
-CREATE TABLE User_ (
+CREATE TABLE appuser (
     login VARCHAR(20) PRIMARY KEY,
-    first_name VARCHAR(20),
-    last_name VARCHAR(20),
+    first_name VARCHAR(25),
+    last_name VARCHAR(25),
     email VARCHAR(40),
-    type VARCHAR(10)
+    appuser_type VARCHAR(10)
 );
 
-CREATE TABLE Mentor (
+CREATE TABLE mentor (
     id SERIAL PRIMARY KEY,
-    user_login VARCHAR(20) REFERENCES User_(login)
+    appuser_login VARCHAR(20) REFERENCES appuser(login)
 );
 
-CREATE TABLE Class_ (
+CREATE TABLE classroom (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(20)
+    classroom_name VARCHAR(20)
 );
 
-CREATE TABLE Mentor_class (
-    mentor_id INTEGER REFERENCES Mentor(id),
-    class_id INTEGER REFERENCES Class_(id)
+CREATE TABLE mentor_classroom (
+    mentor_id INTEGER REFERENCES mentor(id),
+    classroom_id INTEGER REFERENCES classroom(id)
 );
 
-CREATE TABLE Level_ (
+CREATE TABLE degree (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(20),
+    degree_name VARCHAR(20),
     min_coolcoins INTEGER
 );
 
-CREATE TABLE Codecooler (
+CREATE TABLE codecooler (
     id SERIAL PRIMARY KEY,
-    user_login VARCHAR(20) REFERENCES User_(login),
-    class_id INTEGER REFERENCES Class_(id),
-    level_id INTEGER REFERENCES Level_(id),
+    appuser_login VARCHAR(20) REFERENCES appuser(login),
+    classroom_id INTEGER REFERENCES classroom(id),
+    degree_id INTEGER REFERENCES degree(id),
     wallet INTEGER DEFAULT 0
 );
 
-CREATE TABLE Artifact (  
+CREATE TABLE artifact (  
     id SERIAL PRIMARY KEY,
-    name VARCHAR(40),
-    description VARCHAR(200),
-    price INTEGER,
+    artifact_name VARCHAR(40),
+    artifact_description VARCHAR(200),
+    cost INTEGER,
     category VARCHAR(20)
 );
 
-CREATE TABLE Codecooler_artifact (
+CREATE TABLE codecooler_artifact (
     id SERIAL PRIMARY KEY,
-    codecooler_id INTEGER REFERENCES Codecooler(id),
-    artifact_id INTEGER REFERENCES Artifact(id),
+    codecooler_id INTEGER REFERENCES codecooler(id),
+    artifact_id INTEGER REFERENCES artifact(id),
     purchase_date TIMESTAMP,
     use_date TIMESTAMP
 );
 
-CREATE TABLE Quest (
+CREATE TABLE quest (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(40),
-    description VARCHAR(200),
-    value INTEGER,
+    quest_name VARCHAR(40),
+    quest_description VARCHAR(200),
+    prize INTEGER,
     category VARCHAR(20)
 );
 
-CREATE TABLE Codecooler_quest (
+CREATE TABLE codecooler_quest (
     id SERIAL PRIMARY KEY,
-    codecooler_id INTEGER REFERENCES Codecooler(id),
-    quest_id INTEGER REFERENCES Quest(id),
+    codecooler_id INTEGER REFERENCES codecooler(id),
+    quest_id INTEGER REFERENCES quest(id),
     mark_date TIMESTAMP
 );
 
-CREATE TABLE Team (
+CREATE TABLE team (
     id SERIAL PRIMARY KEY,
-    artefact_id INTEGER REFERENCES Artifact(id),
-    leader_id INTEGER REFERENCES Codecooler(id),
+    artefact_id INTEGER REFERENCES artifact(id),
+    leader_id INTEGER REFERENCES codecooler(id),
     status VARCHAR(10) DEFAULT 'Pending'
 );
 
-CREATE TABLE Codecooler_team (
-    codecooler_id INTEGER REFERENCES Codecooler(id),
-    team_id INTEGER REFERENCES Team(id),
+CREATE TABLE codecooler_team (
+    codecooler_id INTEGER REFERENCES codecooler(id),
+    team_id INTEGER REFERENCES team(id),
     coolcoins INTEGER
 );
