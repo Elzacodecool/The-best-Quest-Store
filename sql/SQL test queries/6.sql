@@ -1,4 +1,4 @@
-BEGIN TRANSACTION;
+BEGIN;
 
 INSERT INTO appuser
 	(login, first_name, last_name, email, appuser_type)
