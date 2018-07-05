@@ -1,5 +1,3 @@
-BEGIN TRANSACTION;
-
 INSERT INTO appuser
 (login, first_name, last_name, email, appuser_type)
 VALUES ('sample login',
@@ -11,5 +9,3 @@ VALUES ('sample login',
 INSERT INTO mentor 
 (appuser_login)
 VALUES ('same sample login');
-
-COMMIT;

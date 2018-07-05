@@ -1,5 +1,3 @@
-BEGIN TRANSACTION;
-
 INSERT INTO appuser
 	(login, first_name, last_name, email, appuser_type)
 VALUES (
@@ -16,10 +14,6 @@ VALUES (
 	'same specified login',
 	'sample class id',
 	'sample level id');
-
-COMMIT;
-
-
 
 
 select * from appuser
