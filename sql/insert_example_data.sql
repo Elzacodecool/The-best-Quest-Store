@@ -6,7 +6,7 @@ VALUES
 ('java');
 
 INSERT INTO Degree
-(degree_name, min_coolcoins)
+(degree_name,  min_earned_coolcoins)
 VALUES
 ('beginner', 200),
 ('master', 400),
@@ -26,10 +26,10 @@ COMMIT;
 
 BEGIN;
 INSERT INTO Codecooler
-(appuser_login, classroom_id, earnedCoolcoins )
+(appuser_login, classroom_id, earned_coolcoins )
 VALUES
-('adamszmidt', 1, 1),
-('przemyslawpolczak', 1, 33);
+('adamszmidt', 1, 44),
+('przemyslawpolczak', 1, 222);
 
 INSERT INTO Mentor
 (Appuser_login)

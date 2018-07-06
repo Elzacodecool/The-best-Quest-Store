@@ -27,14 +27,14 @@ CREATE TABLE mentor_classroom (
 CREATE TABLE degree (
     id SERIAL PRIMARY KEY,
     degree_name VARCHAR(20),
-    min_coolcoins INTEGER
+    min_earned_coolcoins INTEGER
 );
 
 CREATE TABLE codecooler (
     id SERIAL PRIMARY KEY,
     appuser_login VARCHAR(20) REFERENCES appuser(login),
     classroom_id INTEGER REFERENCES classroom(id),
-    earnedCoolcoins INTEGER,
+    earned_coolcoins INTEGER,
     wallet INTEGER DEFAULT 0
 );
 
