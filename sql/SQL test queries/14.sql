@@ -1,6 +1,6 @@
 SELECT first_name, last_name, wallet FROM appuser
 INNER JOIN codecooler
-ON codecooler.appuser_login = user_.login;
+ON codecooler.appuser_login = appuser.login;
 
 
 

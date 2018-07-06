@@ -13,7 +13,7 @@ WHERE codecooler_id = 'specified codecooler id';
 
 
 UPDATE codecooler_artifact
-SET use_date = current_date
+SET use_date = current_timestamp
 WHERE id = specified_artifact_id;
 
 

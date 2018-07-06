@@ -9,7 +9,7 @@ WHERE id =
 (SELECT codecooler_id FROM codecooler_quest
 WHERE id = selected_done_quest_id);
 UPDATE codecooler_quest
-SET mark_date = current_date
+SET mark_date = current_timestamp
 WHERE id = selected_done_quest_id;
 
 
