@@ -26,10 +26,10 @@ COMMIT;
 
 BEGIN;
 INSERT INTO Codecooler
-(appuser_login, classroom_id, degree_id )
+(appuser_login, classroom_id, earnedCoolcoins )
 VALUES
 ('adamszmidt', 1, 1),
-('przemyslawpolczak', 1,1);
+('przemyslawpolczak', 1, 33);
 
 INSERT INTO Mentor
 (Appuser_login)

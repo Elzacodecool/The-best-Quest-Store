@@ -34,7 +34,7 @@ CREATE TABLE codecooler (
     id SERIAL PRIMARY KEY,
     appuser_login VARCHAR(20) REFERENCES appuser(login),
     classroom_id INTEGER REFERENCES classroom(id),
-    degree_id INTEGER REFERENCES degree(id),
+    earnedCoolcoins INTEGER,
     wallet INTEGER DEFAULT 0
 );
 
