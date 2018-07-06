@@ -14,12 +14,12 @@ VALUES
 ('jez', 2000);
 
 INSERT INTO Appuser
-(login, first_name, last_name, email, appuser_type)
+(login, password, first_name, last_name, email, appuser_type)
 VALUES
-('adamszmidt', 'adam', 'szmidt', 'aszmidt92@gmail.com', 'codecooler'),
-('marekgrzybek', 'marek', 'grzybek', 'marekg@gmail.com', 'mentor'),
-('przemyslawpolczak', 'przemyslaw', 'polczak', 'przemyslaw.polczak@gmail.com', 'codecooler'),
-('jerzyjerzowski', 'jerzy', 'jerzowski', 'jez123@gmail.com', 'admin');
+('adamszmidt', 'a', 'adam', 'szmidt', 'aszmidt92@gmail.com', 'codecooler'),
+('marekgrzybek', 'm',  'marek', 'grzybek', 'marekg@gmail.com', 'mentor'),
+('przemyslawpolczak', 'p', 'przemyslaw', 'polczak', 'przemyslaw.polczak@gmail.com', 'codecooler'),
+('jerzyjerzowski', 'j', 'jerzy', 'jerzowski', 'jez123@gmail.com', 'admin');
 
 COMMIT;
 

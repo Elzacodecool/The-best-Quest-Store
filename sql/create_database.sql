@@ -2,6 +2,7 @@ CREATE DATABASE queststore;
 
 CREATE TABLE appuser (
     login VARCHAR(20) PRIMARY KEY,
+    password VARCHAR(25),
     first_name VARCHAR(25),
     last_name VARCHAR(25),
     email VARCHAR(40),
