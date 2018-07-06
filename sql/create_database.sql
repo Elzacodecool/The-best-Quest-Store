@@ -20,7 +20,8 @@ CREATE TABLE classroom (
 
 CREATE TABLE mentor_classroom (
     mentor_id INTEGER REFERENCES mentor(id),
-    classroom_id INTEGER REFERENCES classroom(id)
+    classroom_id INTEGER REFERENCES classroom(id),
+    PRIMARY KEY (mentor_id, classroom_id) 
 );
 
 CREATE TABLE degree (
@@ -78,5 +79,6 @@ CREATE TABLE team (
 CREATE TABLE codecooler_team (
     codecooler_id INTEGER REFERENCES codecooler(id),
     team_id INTEGER REFERENCES team(id),
-    coolcoins INTEGER
+    coolcoins INTEGER,
+    PRIMARY KEY (codecooler_id, team_id)
 );
