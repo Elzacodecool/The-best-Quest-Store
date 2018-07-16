@@ -1,0 +1,49 @@
+Common:
+- login page,
+
+
+As a admin:
+- dashboard with a menu,
+	Mentors:
+		- mentors list/view,
+			- view/edit one mentor,
+				- display mentor's students, 
+			- create new mentor.
+	Class:
+		- class list/view,
+			- view/edit one class,
+			- create new class,
+	Degree:
+		- degree list/view,
+			- view/edit one degree,
+			- create new degree,
+
+As a mentor:
+- dashboard with a menu,
+
+	Codecooler:
+								
+		- codecoolers list/view,(wallet balance )
+			- view/edit one codecooler,
+				- view quest list(mark quest),
+				- view artifact list(mark artifact) - podzielone na tabelki kupionych i nie kupionych artefaktów
+			- create new codecooler,
+	Quest:
+		- quest list/view,
+			- edit quest,
+			- create new quest,
+	Artifact:
+		- artifact list/view,
+			- edit artifact,
+			- create new qrtifact.
+
+As a codecooler: (wallet, degree)
+- dashboard with a menu,
+
+	- view my profile, (see level of experience)
+	- display my team list
+		- view/edit one team
+	- display all team list(display all information about, join),
+	- display artifacts list,
+		- buy artifact(depends that artifact is solo or team artifact)
+	- display my quests list,
