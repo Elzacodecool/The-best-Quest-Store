@@ -1,0 +1,12 @@
+.content-section {
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 500px;
+    height: 85vh;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    flex-wrap: wrap;
+
+
+  }
