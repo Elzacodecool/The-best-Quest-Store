@@ -1,9 +1,4 @@
-body {
-    background-image: url("Mainbackground.png");
-    font-family: 'Paprika', bold;
-}
-
-.main{
+ .main{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,10 +21,17 @@ body {
 
 .flexbox-container div{
     padding: 5px;
+    display: 
 }
 
 h2{
+    font-family: paprika;
     text-align: center;
+}
+
+.list_information{
+    font-family: paprika;
+    color: aliceblue;
 }
 
 #topcontent{
@@ -39,6 +41,9 @@ h2{
 .nameinput{
     margin-bottom: -5px;
     margin-left: 10px;
+    font-family: paprika;
+    margin-top: -5px;
+
 }
 
 .profilebox{
@@ -61,7 +66,7 @@ h2{
 
 .submitbutton{
     margin: 10px;
-    width: 100px;
+    width: auto;
     height: 35px;
     background-color: white;
     border: white;
@@ -83,8 +88,13 @@ h2{
     height: 80px;
     border-radius: 50%;
     margin-top: -50px;
+    margin-left: -350px;
 }
 
-#mentorimage{
-    margin-left: -350px
+#quest_button{
+    font-size: 20px;
+}
+
+#artifact_button{
+    font-size: 20px;
 }

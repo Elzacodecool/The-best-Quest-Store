@@ -9,11 +9,11 @@ As a admin:
 			- view/edit one mentor,
 				- display mentor's students, 
 			- create new mentor.
-	Class:
+	Classes:
 		- class list/view,
 			- view/edit one class,
 			- create new class,
-	Degree:
+	Degrees:
 		- degree list/view,
 			- view/edit one degree,
 			- create new degree,
