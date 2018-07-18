@@ -3,13 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Login page</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/adamstandard.css">
     
         
     <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/page-footer.css">
-    <link href="https://fonts.googleapis.com/css?family=Merienda:700|Paprika" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.cogitm/css?family=Merienda:700|Paprika" rel="stylesheet"> 
 </head>
 
 <body>
@@ -46,13 +45,26 @@
         </li>
         </ul>
     </nav>
-
-    <section class="content-section">
-        <p>
-            Lorem ipsum
-        </p>
-    </section>
-
+    
+<div class="main">    
+    <div class="flexbox-container">
+        <img src="images/mentor.jpeg" class="avatar" id="mentorimage">
+        <form action="/action_page.php">
+            <div id="topcontent">
+                <h2>Marek Grzybek</h2>
+                <p class="nameinput"> Password:</p>
+                <input class="profilebox" type="text" name="password" value="qwerty123">
+            </div>
+            <div>
+                <p class="nameinput">Email:</p>
+                <input class="profilebox" type="text" name="email" value="marek.grzybek@gmailk.com">
+            </div>
+            <div>
+                <input class="submitbutton" type="submit" value="Save changes">
+            </div>
+        </form>
+    </div>
+</div> 
     <footer class="page-footer">
         &#169; Copyright a&#38;a 2018
     </footer>   

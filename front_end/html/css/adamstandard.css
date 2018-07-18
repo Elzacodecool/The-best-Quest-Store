@@ -1,14 +1,14 @@
-body{
+body {
     background-image: url("Mainbackground.png");
     font-family: 'Paprika', bold;
 }
-
 
 .main{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 90vh;
+    flex-direction: column;
 }
 
 .flexbox-container{
@@ -27,8 +27,18 @@ body{
 .flexbox-container div{
     padding: 5px;
 }
+
 h2{
     text-align: center;
+}
+
+#topcontent{
+    margin-top: -30px;
+}
+
+.nameinput{
+    margin-bottom: -5px;
+    margin-left: 10px;
 }
 
 .profilebox{
@@ -36,6 +46,8 @@ h2{
     width: 300px;
     height: 25px;
     border-radius: 10px;
+    margin: 10px;
+    border: solid white;
 }
 
 .loginbox{
@@ -44,18 +56,25 @@ h2{
     height: 25px;
     border-radius: 10px;
     margin: 10px;
-
+    border: solid white;
 }
 
 .submitbutton{
+    margin: 10px;
     width: 100px;
-    height: 25px;
+    height: 35px;
+    background-color: white;
+    border: white;
+    color: gray;
+    text-align: center;
     border-radius: 10px
 }
 
 .submitbutton:hover{
     cursor: pointer;
-    color: #000;
+    background-color: white; 
+    color: #5e526d;
+    border: 2px solid #5e526d;
     border-radius: 10px
 }
 
@@ -66,5 +85,6 @@ h2{
     margin-top: -50px;
 }
 
-
-
+#mentorimage{
+    margin-left: -350px
+}
