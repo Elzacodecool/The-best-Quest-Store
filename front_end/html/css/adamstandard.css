@@ -1,4 +1,4 @@
- .main{
+.main{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,12 +11,20 @@
     border-radius: 25px;
     border: 5px solid #5e526d;
     margin: 5px;
+
     
     display: flex;
     width: 350px;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
+}
+
+@media and screen(max-height: 600px){
+    .flexbox-container{
+        height: 800px;
+        width: auto;
+    }
 }
 
 .flexbox-container div{
