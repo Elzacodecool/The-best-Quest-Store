@@ -9,7 +9,13 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-  }
+}
+
+.div-content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 h1 {
     color: #28154c;
@@ -48,5 +54,11 @@ th {
 
 .table-img {
     height: 40px;
+}
+
+.under-table-img {
+    height: 70px;
+    margin-top: 10px;
+    align-self: flex-end;
 }
 
