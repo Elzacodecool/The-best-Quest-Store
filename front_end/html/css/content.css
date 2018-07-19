@@ -56,9 +56,12 @@ th {
     height: 40px;
 }
 
+.under-table-a {
+    align-self: flex-end;
+}
+
 .under-table-img {
     height: 70px;
     margin-top: 10px;
-    align-self: flex-end;
 }
 
