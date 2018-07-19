@@ -46,8 +46,8 @@ tbody {
 th, td {
     padding: 15px;
     text-align: center;
-
 }
+
 th {
     border-bottom: 3px solid #3d2d57;
 }
@@ -63,5 +63,14 @@ th {
 .under-table-img {
     height: 70px;
     margin-top: 10px;
+}
+
+.round-img {
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.under-form-div {
+    display: flex;
 }
 
