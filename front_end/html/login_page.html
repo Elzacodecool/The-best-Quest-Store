@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <script src="login_script.js"></script>
     <nav class="navbar">
         <div class="navbar-store">
         <img class="navbar-logo" src="images/logo.png" alt="Logo Codecool">
@@ -21,17 +22,15 @@
         
         <div class="flexbox-container">
                 <img src="images/avatar.png" class="avatar">
-            <form action="/action_page.php">
                 <div>
-                    <input class="loginbox" type="text" name="login" placeholder=" Username">
+                    <input class="loginbox" type="text" name="login" placeholder=" Username" id="loginInput" value="">
                 </div>
                 <div>
-                    <input class="loginbox" type="password" name="password" placeholder=" Password">
+                    <input class="loginbox" type="password" name="password" placeholder=" Password" id="passwordInput" value="">
                 </div>
                 <div>
-                    <input class="submitbutton" type="submit" value="Log in" disabled="disabled"> 
+                    <input class="submitbutton" type="submit" value="Log in" onclick="validateLogin()"> 
                 </div>
-            </form>
         </div>
     </div>
         
