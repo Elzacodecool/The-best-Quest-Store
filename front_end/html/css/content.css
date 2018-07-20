@@ -46,6 +46,7 @@ h1 {
 table {
     width: 100%;
     color: #3d2d57;
+    background-color: rgba(255, 255, 255, 0.3);
     border: 5px solid #3d2d57;
     border-radius: 25px;  
     border-spacing: 0;
