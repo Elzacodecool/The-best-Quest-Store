@@ -1,8 +1,27 @@
+.codecooler-header-section {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.codecooler-header-section-p {
+    color: #ffffff;
+    font-family: 'Paprika', cursive;
+    font-size: 20px;
+    letter-spacing: 1.35px;   
+    padding: 10px;
+    margin: 10px;  
+}
+
+.degree, .wallet {
+    padding: 20px;
+    margin: 10px;   
+}
+
 .content-section {
     padding: 20px;
     box-sizing: border-box;
     min-height: 500px;
-    height: 85vh;
+    height: 80vh;
 
     display: flex;
     flex-direction: column;
