@@ -1,5 +1,8 @@
 package com.codecool.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Artifact {
 
     private int id;
@@ -8,10 +11,20 @@ public class Artifact {
     private int cost;
     private String category;
 
-    public Artifact(String name, String description, int cost) {
+    public Artifact(String name, String description, int cost, String category) {
         this.name = name;
         this.description = description;
         this.cost = cost;
+        this.category = category;
+    }
+
+    // data from DB
+    public Artifact(int id, String name, String description, int cost, String category) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.category = category;
     }
 
     public int getId() {
@@ -48,5 +61,31 @@ public class Artifact {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String toString() {
+        return String.format("[Artifact] id: %s, name: %s, description: %s, cost: %d, category: %s", 
+                            this.id, this.name, this.description, this.cost, this.category);
+    }
+
+    // for sql query to insert quest to DB
+    public Map<Integer, Object> toHashMap() {
+
+        Map<Integer, Object> questMap = new HashMap<>();
+        questMap.put(1, this.name);
+        questMap.put(2, this.description);
+        questMap.put(3, this.cost);
+        questMap.put(4, this.category);
+
+        return questMap;
+    }
+
+    // for sql query to update quest in DB
+    public Map<Integer, Object> toHashMapWithId() {
+
+        Map<Integer, Object> questMap = toHashMap();
+        questMap.put(5, this.id);
+
+        return questMap;
     }
 }
