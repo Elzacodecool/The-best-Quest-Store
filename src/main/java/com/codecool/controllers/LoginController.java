@@ -1,9 +1,15 @@
 package com.codecool.controllers;
 
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpCookie;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginController implements HttpHandler {
     private AppUserDAO appUserDAO;
@@ -13,7 +19,43 @@ public class LoginController implements HttpHandler {
     }
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException {
+    public void handle(HttpExchange httpExchange) throws IOException {
+        String method = httpExchange.getRequestMethod();
+        String response = "hello";
+
+        if (method.equals("POST")) {
+            checkLoginAndPassword(httpExchange);
+        }
+        httpExchange.sendResponseHeaders(200, response.length());
+        OutputStream os = httpExchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+    }
+
+    private void checkLoginAndPassword(HttpExchange httpExchange) {
+        Map<String, String> userData = getDataFromRequest(httpExchange);
+        String login = userData.get("login");
+        String password = userData.get("password");
+        String accountType = userData.get("accountType");
+
+        if (isCorrectLoginAndPassword(login, password)) {
+            sendCookies(httpExchange, login);
+            redirect(httpExchange, accountType);
+        } else {
+            System.out.println("wrong data");
+            redirect(httpExchange, "login");
+        }
+    }
+
+    private boolean isCorrectLoginAndPassword(String login, String password) {
+        return !appUserDAO.get(login, password).equals(null);
+    }
+
+
+    private void sendCookies(HttpExchange httpExchange, String login) {
+        HttpCookie cookie = new HttpCookie("login", login);
+        httpExchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
+    }
 
 
     private Map<String, String> getDataFromRequest(HttpExchange httpExchange) {
