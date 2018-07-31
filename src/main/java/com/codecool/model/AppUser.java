@@ -2,12 +2,12 @@ package com.codecool.model;
 
 public class AppUser {
 
-    private String login;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String appuserType;
+    protected String login;
+    protected String password;
+    protected String firstName;
+    protected String lastName;
+    protected String email;
+    protected String appuserType;
 
     public AppUser(String login, String password, String firstName, String lastName, String email, String appuserType) {
         this.login = login;
@@ -57,4 +57,4 @@ public class AppUser {
     public String getAppuserType() {
         return this.appuserType;
     }
-} 
+}
