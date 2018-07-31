@@ -64,7 +64,7 @@ public class Quest {
     }
 
     public String toString() {
-        return String.format("[Quest] id: %s, name: %s, description: %s, prize: %d, category: %s", 
+        return String.format("[Quest] id: %d, name: %s, description: %s, prize: %d, category: %s", 
                             this.id, this.name, this.description, this.prize, this.category);
     }
 

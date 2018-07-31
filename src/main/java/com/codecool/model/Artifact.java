@@ -64,7 +64,7 @@ public class Artifact {
     }
 
     public String toString() {
-        return String.format("[Artifact] id: %s, name: %s, description: %s, cost: %d, category: %s", 
+        return String.format("[Artifact] id: %d, name: %s, description: %s, cost: %d, category: %s", 
                             this.id, this.name, this.description, this.cost, this.category);
     }
 

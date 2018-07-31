@@ -31,7 +31,7 @@ public class Classroom {
     }
 
     public String toString() {
-        return String.format("[Classroom] id: %s, name: %s", this.id, this.name);
+        return String.format("[Classroom] id: %d, name: %s", this.id, this.name);
     }
 
     // for sql query to insert classroom to DB
