@@ -6,6 +6,12 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 
 public class LoginController implements HttpHandler {
+    private AppUserDAO appUserDAO;
+
+    public LoginController(AppUserDAO appUserDAO) {
+        this.appUserDAO =  appUserDAO;
+    }
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
