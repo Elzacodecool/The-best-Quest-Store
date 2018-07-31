@@ -8,6 +8,6 @@ import java.io.IOException;
 public class LoginController implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        
+
     }
 }
