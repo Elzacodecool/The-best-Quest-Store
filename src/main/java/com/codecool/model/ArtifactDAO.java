@@ -37,7 +37,7 @@ public class ArtifactDAO extends CommonDAO {
         
         Map<String, String> result = executeSQLSelect(connection, sqlString, id).get(0);
 
-        //Artifact(int id, String name, String description, int cost, String category)
+        //Artifact(Integer id, String name, String description, Integer cost, String category)
         return new Artifact(Integer.valueOf(result.get("id")), 
                          result.get("artifact_name"), 
                          result.get("artifact_description"), 
@@ -51,7 +51,7 @@ public class ArtifactDAO extends CommonDAO {
         List<Map<String, String>> results = executeSQLSelect(connection, sql);
         List<Artifact> artifacts = new ArrayList<Artifact>();
 
-        //Artifact(int id, String name, String description, int cost, String category)
+        //Artifact(Integer id, String name, String description, Integer cost, String category)
         for (Map<String, String> result : results) {
             artifacts.add(new Artifact(Integer.valueOf(result.get("id")), 
                                  result.get("artifact_name"), 

@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class Artifact {
 
-    private int id;
+    private Integer id;
     private String name;
     private String description;
-    private int cost;
+    private Integer cost;
     private String category;
 
-    public Artifact(String name, String description, int cost, String category) {
+    public Artifact(String name, String description, Integer cost, String category) {
         this.name = name;
         this.description = description;
         this.cost = cost;
@@ -19,7 +19,7 @@ public class Artifact {
     }
 
     // data from DB
-    public Artifact(int id, String name, String description, int cost, String category) {
+    public Artifact(Integer id, String name, String description, Integer cost, String category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -27,7 +27,7 @@ public class Artifact {
         this.category = category;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -47,11 +47,11 @@ public class Artifact {
         this.description = description;
     }
 
-    public int getCost() {
+    public Integer getCost() {
         return this.cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(Integer cost) {
         this.cost = cost;
     }
 

@@ -37,7 +37,7 @@ public class QuestDAO extends CommonDAO {
         
         Map<String, String> result = executeSQLSelect(connection, sqlString, id).get(0);
 
-        //Quest(int id, String name, String description, int prize, String category)
+        //Quest(Integer id, String name, String description, Integer prize, String category)
         return new Quest(Integer.valueOf(result.get("id")), 
                          result.get("quest_name"), 
                          result.get("quest_description"), 
@@ -51,7 +51,7 @@ public class QuestDAO extends CommonDAO {
         List<Map<String, String>> results = executeSQLSelect(connection, sql);
         List<Quest> quests = new ArrayList<Quest>();
 
-        //Quest(int id, String name, String description, int prize, String category)
+        //Quest(Integer id, String name, String description, Integer prize, String category)
         for (Map<String, String> result : results) {
             quests.add(new Quest(Integer.valueOf(result.get("id")), 
                                  result.get("quest_name"), 

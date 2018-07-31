@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class Quest {
 
-    private int id;
+    private Integer id;
     private String name;
     private String description;
-    private int prize;
+    private Integer prize;
     private String category;
 
-    public Quest(String name, String description, int prize, String category) {
+    public Quest(String name, String description, Integer prize, String category) {
         this.name = name;
         this.description = description;
         this.prize = prize;
@@ -19,7 +19,7 @@ public class Quest {
     }
 
     // data from DB
-    public Quest(int id, String name, String description, int prize, String category) {
+    public Quest(Integer id, String name, String description, Integer prize, String category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -27,7 +27,7 @@ public class Quest {
         this.category = category;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -47,11 +47,11 @@ public class Quest {
         this.description = description;
     }
 
-    public int getPrize() {
+    public Integer getPrize() {
         return this.prize;
     }
 
-    public void setPrize(int prize) {
+    public void setPrize(Integer prize) {
         this.prize = prize;
     }
 
