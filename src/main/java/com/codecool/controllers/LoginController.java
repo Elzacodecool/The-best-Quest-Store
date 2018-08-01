@@ -1,5 +1,7 @@
 package com.codecool.controllers;
 
+import com.codecool.model.AppUserDAO;
+import com.codecool.model.FactoryDAO;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -12,11 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginController implements HttpHandler {
-    private AppUserDAO appUserDAO;
-
-    public LoginController(AppUserDAO appUserDAO) {
-        this.appUserDAO =  appUserDAO;
-    }
+    private AppUserDAO appUserDAO = new FactoryDAO().getAppUserDAO();
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
