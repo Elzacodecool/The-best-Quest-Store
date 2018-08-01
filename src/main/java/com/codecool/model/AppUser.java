@@ -67,7 +67,7 @@ public class AppUser {
     }
 
     // for sql query to insert appUser to DB
-    public Map<Integer, Object> toHashMap() {
+    public Map<Integer, Object> toHashMapAppUser() {
 
         Map<Integer, Object> appUserMap = new HashMap<>();
         appUserMap.put(1, this.login);
@@ -81,7 +81,7 @@ public class AppUser {
     }
 
     // for sql query to insert appUser to DB
-    public Map<Integer, Object> toHashMapToUpdate() {
+    public Map<Integer, Object> toHashMapAppUserToUpdate() {
 
         Map<Integer, Object> appUserMap = new HashMap<>();
         appUserMap.put(1, this.password);

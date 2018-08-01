@@ -25,13 +25,13 @@ public class AppUserDAO extends CommonDAO {
     public int add(AppUser appUser) {
         
         String sqlString = "INSERT INTO appuser (login, password, first_name, last_name, email, appuser_type) VALUES (?, ?, ?, ?, ?, ?);";
-        return executeSQLUpdateDB(connection, sqlString, appUser.toHashMap());
+        return executeSQLUpdateDB(connection, sqlString, appUser.toHashMapAppUser());
     }
 
     public int update(AppUser appUser) {
 
         String sqlString = "UPDATE appuser SET password = ?, first_name = ?, last_name = ?, email = ? WHERE login = ?;";
-        return executeSQLUpdateDB(connection, sqlString, appUser.toHashMapToUpdate());
+        return executeSQLUpdateDB(connection, sqlString, appUser.toHashMapAppUserToUpdate());
     }
 
     public AppUser get(String login) {
