@@ -1,0 +1,96 @@
+.codecooler-header-section {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.codecooler-header-section-p {
+    color: #ffffff;
+    font-family: 'Paprika', cursive;
+    font-size: 20px;
+    letter-spacing: 1.35px;   
+    padding: 10px;
+    margin: 10px;  
+}
+
+.degree, .wallet {
+    padding: 20px;
+    margin: 10px;   
+}
+
+.content-section {
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 500px;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.div-content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #28154c;
+    font-family: 'Paprika', cursive;
+    letter-spacing: 1.35px;
+
+}
+
+table {
+    width: 100%;
+    color: #3d2d57;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 5px solid #3d2d57;
+    border-radius: 25px;  
+    border-spacing: 0;
+}
+
+thead {
+    font-family: 'Paprika';
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+tbody {
+    font-family: 'Georgia';
+    font-size: 16px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    border-bottom: 3px solid #3d2d57;
+}
+
+.table-img {
+    height: 40px;
+}
+
+.under-table-a {
+    align-self: flex-end;
+}
+
+.under-table-img {
+    height: 70px;
+    margin-top: 10px;
+}
+
+.round-img {
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.under-form-div {
+    display: flex;
+}
+

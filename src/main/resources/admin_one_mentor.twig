@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Quest Store</title>
+    <link rel="stylesheet" href="css/adamstandard.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/page-footer.css">
+    <link href="https://fonts.googleapis.com/css?family=Merienda:700|Paprika" rel="stylesheet"> 
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-store">
+        <img class="navbar-logo" src="images/logo.png" alt="Logo Codecool">
+         Quest Store
+        </div>
+        <ul class="navbar-list">
+        <li>
+            <a href="/login/admin/profile">
+            Profile
+            </a>
+        </li>
+        <li>
+            <a href="/login/admin/mentors">
+            Mentors
+            </a>
+        </li>
+        <li>
+            <a href="/login/admin/classes">
+            Classes
+            </a>
+        </li>
+        <li>
+            <a href="/login/admin/degrees">
+            Degrees
+            </a> 	
+        </li>
+        <li>
+            <a href="/login">
+                <img class="navbar-logout" src="images/logout.png" alt="Logout" title="Press to logout">
+            </a>
+        </li>
+        </ul>
+    </nav>
+<div class="main">    
+    <div class="flexbox-container">
+        <img src="images/mentor.png" class="avatar">
+        <form method="POST">
+            <div id="topcontent">
+                <h2>{{mentor.getFirstName() }} {{ mentor.getLastName() }} ({{ mentor.getLogin() }})</h2>
+                <p class="nameinput">Last name:</p>
+                <input class="profilebox" type="text" name="lastName" value="{{ mentor.getLastName() }}">
+            </div>
+            <div>
+                <p class="nameinput"> Password:</p>
+                <input class="profilebox" type="text" name="password" value="{{ mentor.getPassword() }}">
+            </div>
+            <div>
+                <p class="nameinput">Email:</p>
+                <input class="profilebox" type="text" name="email" value="{{ mentor.getEmail() }}">
+            </div>
+            <div>
+                <p class="nameinput">Class 1:</p>
+                <input class="profilebox" type="text" name="class1" value="2017.3 Krk">
+            </div>
+            <div>
+                <p class="nameinput">Class 2:</p>
+                <input class="profilebox" type="text" name="class2" value="">
+            </div>
+            <div>
+                <input class="submitbutton" type="submit" value="Save changes">
+            </div>
+        </form>
+    </div>
+    <div class="under-form-div">
+            <a class="under-table-a" href="/login/admin/mentors/admin_one_mentor/{{ }}/admin_one_mentor_codecoolers">
+                <img class="under-table-img round-img" src="images/codecooler.png" alt="Mentor's codecoolers" title="Mentor's codecoolers"></a>
+    </div> 
+</div> 
+    <footer class="page-footer">
+        &#169; Copyright a&#38;a 2018
+    </footer>   
+</body>
+</html>
