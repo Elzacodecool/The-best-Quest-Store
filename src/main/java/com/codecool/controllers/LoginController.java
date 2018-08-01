@@ -1,10 +1,13 @@
 package com.codecool.controllers;
 
+import com.codecool.model.AppUser;
 import com.codecool.model.AppUserDAO;
 import com.codecool.model.FactoryDAO;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.io.*;
 import java.net.HttpCookie;
@@ -19,7 +22,10 @@ public class LoginController implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String method = httpExchange.getRequestMethod();
-        String response = "hello";
+        String classpath = "static/templates/login_page.twig";
+        JtwigModel jtwigModel = JtwigModel.newModel();
+        JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(classpath);
+        String response = jtwigTemplate.render(jtwigModel);
 
         if (method.equals("POST")) {
             checkLoginAndPassword(httpExchange);
@@ -34,19 +40,22 @@ public class LoginController implements HttpHandler {
         Map<String, String> userData = getDataFromRequest(httpExchange);
         String login = userData.get("login");
         String password = userData.get("password");
-        String accountType = userData.get("accountType");
 
         if (isCorrectLoginAndPassword(login, password)) {
+            String accountType = appUserDAO.get(login).getAppuserType();
             sendCookies(httpExchange, login);
             redirect(httpExchange, accountType);
         } else {
-            System.out.println("wrong data");
             redirect(httpExchange, "login");
         }
     }
 
     private boolean isCorrectLoginAndPassword(String login, String password) {
-        return appUserDAO.get(login).getPassword().equals(password);
+        AppUser user = appUserDAO.get(login);
+        if (user == null) {
+            return false;
+        }
+        return user.getPassword().equals(password);
     }
 
 

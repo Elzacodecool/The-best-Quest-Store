@@ -19,7 +19,7 @@ public abstract class CommonDAO {
         ResultSet resultSet = null;
         ResultSetMetaData metaData = null;
 
-        List<Map<String, String>> resultList = new ArrayList<Map<String,String>>();
+        List<Map<String, String>> resultList = new ArrayList<>();
         Map<String, String> rowMap;
 
         try {
@@ -35,7 +35,7 @@ public abstract class CommonDAO {
             metaData = resultSet.getMetaData();
 
             while(resultSet.next()) {
-                rowMap = new HashMap<String, String>();
+                rowMap = new HashMap<>();
 
                 for(int i = 1; i <= metaData.getColumnCount(); i++) {
                     rowMap.put(metaData.getColumnName(i), resultSet.getString(metaData.getColumnName(i)));
@@ -48,7 +48,8 @@ public abstract class CommonDAO {
         catch (SQLException e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }   
+        }
+
         return resultList;
     }
 

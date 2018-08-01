@@ -17,82 +17,110 @@ import java.util.Map;
 
 public class AdminController implements HttpHandler {
 
+
+    // 1. mentor dao i mentors bedzie działało
+    // 2. dostac sie do dobrego obiektu admina i profile bedzie działac
+    // 3. degrees chuj wie o co chodzi
+    // 4. w classess zliaczac mentorów i cc przypsianych
+
     private FactoryDAO factoryDAO = new FactoryDAO();
 
 
     private List<Mentor> mentors= new ArrayList<>();
     private List<Degree> degrees = new ArrayList<>();
     private List<Classroom> classrooms = new ArrayList<>();
-    private List<Admin> admins = new ArrayList<>();
 
 
-    private Integer id;
     private String response = "";
+    private String[] uri;
     private JtwigModel model;
+
+
     public void handle(HttpExchange httpExchange) throws IOException {
-
         response = "";
+        uri = getSplittedURI(httpExchange);
         String method = httpExchange.getRequestMethod();
-
         if(isGetMethod(method)){
+
             response = constructResponse(httpExchange);
         }
 
         else{
+            System.out.println("post");
             servingPostMethod(httpExchange);
         }
         sendResponse(httpExchange);
     }
-
 
     private boolean isGetMethod(String method) {
         return method.equals("GET");
     }
 
     private String constructResponse(HttpExchange httpExchange){
-        String[] uri = getSplittedURI(httpExchange);
         String mainSubpage = uri[3];
         model = JtwigModel.newModel();
+
+        // /login/admin/mentors/edit/1
         if (mainSubpage.equals("profile")) {
-            response = getResponse("templates/admin_profile.twig", getAdminData(1));
+            response = getResponse("admin_profile.twig", getAdminData(1));
         }
         else if (mainSubpage.equals("mentors")) {
-            loadMentorsListFromDAO();
-            response = getResponse("templates/admin_mentors.twig", getMentorsModel());
-            if(uri.length==5 && uri[4].equals("admin_create_mentor")){
-                response = getResponse("templates/admin_create_mentor.twig");
-            }
-            else if(uri.length==6){
-                response = getResponse("templates/admin_one_mentor.twig", getMentorById(Integer.parseInt(uri[5])));
-            }
-            else if(uri.length==7){
-                response = getResponse("templates/admin_one_mentor_codecoolers.twig", getMentorById(Integer.parseInt(uri[5]))); // Z TEGO MENTORA TRZEBA JESZCZE WYCIAGNAC LISTE CODECOOLERSÓW
-            }
+            displayMentorsSubpage(uri);
         }
         else if (mainSubpage.equals("classes")) {
-            loadClassesListFromDAO();
-            response = getResponse("templates/admin_classes.twig", getClassesModel());
-            if(uri.length==5){
-                response = getResponse("templates/admin_create_class.twig");
-            }
-            else if(uri.length==6){
-                response = getResponse("templates/admin_one_class.twig", getClassById(Integer.parseInt(uri[5])));
-            }
+            displayClassesSubpage(uri);
         }
         else if (mainSubpage.equals("degrees")) {
-            loadDegreesListFromDAO();
-            response = getResponse("templates/admin_degrees.twig", getDegreesModel());
-            if(uri.length==5){
-                response = getResponse("templates/admin_create_degree.twig");
-            }
-            else if(uri.length==6){
-                response = getResponse("templates/admin_one_degree.twig", getDegreeById(Integer.parseInt(uri[5])));
-            }
+            displayDegreesSubpage(uri);
         }
         else {
-            response = getResponse("templates/admin_profile.twig", getAdminData(1));
+            response = getResponse("admin_profile.twig", getAdminData(1));
         }
         return response;
+    }
+
+    private void displayMentorsSubpage(String[] uri) {
+        loadMentorsListFromDAO();
+        response = getResponse("admin_mentors.twig", getMentorsModel());
+        if(uri.length==5 && uri[4].equals("admin_create_mentor")){
+            response = getResponse("admin_create_mentor.twig");
+        }
+        else if(uri.length==6){
+            response = getResponse("admin_one_mentor.twig", getMentorById(Integer.parseInt(uri[5])));
+        }
+        else if(uri.length==7){
+            response = getResponse("admin_one_mentor_codecoolers.twig", getMentorById(Integer.parseInt(uri[5]))); // Z TEGO MENTORA TRZEBA JESZCZE WYCIAGNAC LISTE CODECOOLERSÓW
+        }
+    }
+
+    private void displayDegreesSubpage(String[] uri) {
+        System.out.println("weszło w degrees");
+        for(int i = 0; i<uri.length; i++){
+            System.out.println(i+1+". "+ uri[i]);
+        }
+        loadDegreesListFromDAO();
+
+        response = getResponse("admin_degrees.twig", getDegreesModel());
+        if(uri.length==5){
+            System.out.println("weszlo w create degree");
+            response = getResponse("admin_create_degree.twig");
+        }
+        else if(uri.length==6){
+            System.out.println("weszlo w one degree");
+            response = getResponse("admin_one_degree.twig", getDegreeById(1));
+            //Integer.parseInt(uri[5])
+        }
+    }
+
+    private void displayClassesSubpage(String[] uri) {
+        loadClassesListFromDAO();
+        response = getResponse("admin_classes.twig", getClassesModel());
+        if(uri.length==5){
+            response = getResponse("admin_create_class.twig");
+        }
+        else if(uri.length==6){
+            response = getResponse("admin_one_class.twig", getClassById(Integer.parseInt(uri[5])));
+        }
     }
 
     private void servingPostMethod(HttpExchange httpExchange) throws IOException{
@@ -112,6 +140,7 @@ public class AdminController implements HttpHandler {
             manageMentorsSubpage(uri, inputs);
         }
         else if (mainSubpage.equals("classes")) {
+            System.out.println("w poscie w classes");
             manageClassesSubpage(uri, inputs);
         }
         else if (mainSubpage.equals("degrees")) {
@@ -121,7 +150,7 @@ public class AdminController implements HttpHandler {
     private void manageProfileSubpage(String[] uri, Map inputs){
         //AdminDAO adminDAO = factoryDAO.getAdminDAO();
         //editAdminProfile(adminDAO.get(1), inputs);
-        response = getResponse("templates/admin_profile.twig", getAdminData(1));
+        response = getResponse("admin_profile.twig", getAdminData(1));
     }
 
     private void manageMentorsSubpage(String[]uri, Map inputs){
@@ -134,7 +163,7 @@ public class AdminController implements HttpHandler {
             //editMentorProfile(mentor,inputs, mentorDAO);
         }
         loadMentorsListFromDAO();
-        response = getResponse("templates/admin_mentors.twig", getMentorsModel());
+        response = getResponse("admin_mentors.twig", getMentorsModel());
     }
 
     private void manageDegreesSubpage(String[] uri, Map inputs){
@@ -147,7 +176,7 @@ public class AdminController implements HttpHandler {
             editDegree(degree, inputs, degreeDAO);
         }
         loadDegreesListFromDAO();
-        response = getResponse("templates/admin_degrees.twig", getDegreesModel());
+        response = getResponse("admin_degrees.twig", getDegreesModel());
     }
 
     private void manageClassesSubpage(String[] uri, Map inputs){
@@ -160,7 +189,7 @@ public class AdminController implements HttpHandler {
             editClassroom(classroom,inputs, classroomDAO);
         }
         loadClassesListFromDAO();
-        response = getResponse("templates/admin_classes.twig", getClassesModel());
+        response = getResponse("admin_classes.twig", getClassesModel());
     }
 
     private String[] getSplittedURI(HttpExchange httpExchange){
@@ -198,9 +227,8 @@ public class AdminController implements HttpHandler {
 
     //METHOD GET
     private JtwigModel getAdminData(Integer id){
-        //AdminDAO adminDAO = factoryDAO.getAdminDAO;
-        //Admin admin = adminDAO.get(id); //SKĄD TUTAJ WZAIC ID ZALOGOWANEGO ADMINA
-        //model.with("admin_profile", admin);
+        Admin admin = new Admin("ziutekk","adam","adam","adamowski","adam@gmail.com","admin");
+        model.with("admin", admin);
         return model;
     }
 
@@ -234,19 +262,19 @@ public class AdminController implements HttpHandler {
         return model;
     }
 
-    private JtwigModel getMentorById(int id){
+    private JtwigModel getMentorById(Integer id){
         MentorDAO mentorDAO = factoryDAO.getMentorDAO();
         //model.with("mentor", mentorDAO.get(id));
         return model;
     }
 
-    private JtwigModel getClassById(int id){
+    private JtwigModel getClassById(Integer id){
         ClassroomDAO classroomDAO= factoryDAO.getClassroomDAO();
         model.with("classroom", classroomDAO.get(id) );
         return model;
     }
 
-    private JtwigModel getDegreeById(int id){
+    private JtwigModel getDegreeById(Integer id){
         DegreeDAO degreeDAO = factoryDAO.getDegreeDAO();
         model.with("degree", degreeDAO.get(id) );
         return model;
