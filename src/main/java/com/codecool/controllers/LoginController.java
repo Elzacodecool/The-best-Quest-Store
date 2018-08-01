@@ -22,7 +22,7 @@ public class LoginController implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String method = httpExchange.getRequestMethod();
-        String classpath = "templates/login_page.twig";
+        String classpath = "static/templates/login_page.twig";
         JtwigModel jtwigModel = JtwigModel.newModel();
         JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(classpath);
         String response = jtwigTemplate.render(jtwigModel);
