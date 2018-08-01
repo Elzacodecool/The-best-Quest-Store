@@ -43,12 +43,9 @@ public class LoginController implements HttpHandler {
 
         if (isCorrectLoginAndPassword(login, password)) {
             String accountType = appUserDAO.get(login).getAppuserType();
-            System.out.println("correct log in");
-            System.out.println(accountType);
             sendCookies(httpExchange, login);
             redirect(httpExchange, accountType);
         } else {
-            System.out.println("wrong data");
             redirect(httpExchange, "login");
         }
     }
