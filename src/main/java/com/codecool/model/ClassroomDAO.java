@@ -50,5 +50,10 @@ public class ClassroomDAO extends CommonDAO {
         }
         return classrooms;
     }
+
+    public int countAssignedMentors(Integer id) {
+//TO DO ??
+        return 1;
+    }
 }
 
