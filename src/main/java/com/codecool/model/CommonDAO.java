@@ -14,7 +14,7 @@ public abstract class CommonDAO {
 
 
     // SELECT
-    protected List<Map<String, String>> executeSQLSelect(Connection connection, String sqlString, Integer sqlArg) {
+    protected List<Map<String, String>> executeSQLSelect(Connection connection, String sqlString, Object sqlArg) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ResultSetMetaData metaData = null;
@@ -25,7 +25,11 @@ public abstract class CommonDAO {
         try {
             preparedStatement = connection.prepareStatement(sqlString);
             if (sqlArg != null) {
-                preparedStatement.setInt(1, sqlArg);
+                if (sqlArg instanceof Integer) {
+                    preparedStatement.setInt(1, (Integer) sqlArg);
+                } else if (sqlArg instanceof String) {
+                    preparedStatement.setString(1, (String) sqlArg);
+                }
             }
             resultSet = preparedStatement.executeQuery();
             metaData = resultSet.getMetaData();
