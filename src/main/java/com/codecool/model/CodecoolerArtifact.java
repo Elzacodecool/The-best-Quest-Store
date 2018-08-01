@@ -33,4 +33,9 @@ public class CodecoolerArtifact {
     public void setUsageDate(Date usageDate) {
         this.usageDate = usageDate;
     }
+
+    public String toString() {
+        return String.format("[CodecoolerArtifact] id: %d, artifact name: %s, purchaseDate: %s, usageDate: %s", 
+                            this.id, this.artifact.getName(), this.purchaseDate.toString(), this.usageDate.toString());
+    }
 }
