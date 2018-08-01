@@ -48,7 +48,7 @@ public class LoginController implements HttpHandler {
     }
 
     private boolean isCorrectLoginAndPassword(String login, String password) {
-        return !appUserDAO.get(login, password).equals(null);
+        return appUserDAO.get(login).getPassword().equals(password);
     }
 
 
