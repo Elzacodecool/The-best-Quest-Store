@@ -17,9 +17,13 @@ import java.util.Map;
 
 public class AdminController implements HttpHandler {
 
-    private List<Mentor> mentors= new ArrayList<Mentor>();
-    private List<Degree> degrees = new ArrayList<Degree>();
-    private List<Classroom> classrooms = new ArrayList<Classroom>();
+    private FactoryDAO factoryDAO = new FactoryDAO();
+
+
+    private List<Mentor> mentors= new ArrayList<>();
+    private List<Degree> degrees = new ArrayList<>();
+    private List<Classroom> classrooms = new ArrayList<>();
+    private List<Admin> admins = new ArrayList<>();
 
 
     private Integer id;
@@ -50,10 +54,10 @@ public class AdminController implements HttpHandler {
         String mainSubpage = uri[3];
         model = JtwigModel.newModel();
         if (mainSubpage.equals("profile")) {
-            //response = getResponse("templates/admin_profile.twig", getAdminData());
+            response = getResponse("templates/admin_profile.twig", getAdminData(1));
         }
         else if (mainSubpage.equals("mentors")) {
-            //loadMentorsListFromDAO();
+            loadMentorsListFromDAO();
             response = getResponse("templates/admin_mentors.twig", getMentorsModel());
             if(uri.length==5 && uri[4].equals("admin_create_mentor")){
                 response = getResponse("templates/admin_create_mentor.twig");
@@ -86,7 +90,7 @@ public class AdminController implements HttpHandler {
             }
         }
         else {
-            //response = getResponse("templates/admin_profile.twig", getAdminData());
+            response = getResponse("templates/admin_profile.twig", getAdminData(1));
         }
         return response;
     }
@@ -101,42 +105,62 @@ public class AdminController implements HttpHandler {
 
         String mainSubpage = uri[3];
 
-
         if (mainSubpage.equals("profile")) {
-            editAdminProfile();
-            //response = getResponse("templates/admin_profile.twig", getAdminData());
+            manageProfileSubpage(uri, inputs);
         }
         else if (mainSubpage.equals("mentors")) {
-            if(uri.length==5 && uri[4].equals("admin_create_mentor")){
-                createMentor(inputs);
-            }
-            else if(uri.length==6){
-                editMentorProfile();
-            }
-            //loadMentorsListFromDAO();
-            response = getResponse("templates/admin_mentors.twig", getMentorsModel());
+            manageMentorsSubpage(uri, inputs);
         }
         else if (mainSubpage.equals("classes")) {
-
-            if(uri.length==5){
-                createClassroom(inputs);
-            }
-            else if(uri.length==6){
-                editClassroom();
-            }
-            loadClassesListFromDAO();
-            response = getResponse("templates/admin_classes.twig", getClassesModel());
+            manageClassesSubpage(uri, inputs);
         }
         else if (mainSubpage.equals("degrees")) {
-            if(uri.length==5){
-                createDegree(inputs);
-            }
-            else if(uri.length==6){
-                editDegree();
-            }
-            loadDegreesListFromDAO();
-            response = getResponse("templates/admin_degrees.twig", getDegreesModel());
+            manageDegreesSubpage(uri, inputs);
         }
+    }
+    private void manageProfileSubpage(String[] uri, Map inputs){
+        //AdminDAO adminDAO = factoryDAO.getAdminDAO();
+        //editAdminProfile(adminDAO.get(1), inputs);
+        response = getResponse("templates/admin_profile.twig", getAdminData(1));
+    }
+
+    private void manageMentorsSubpage(String[]uri, Map inputs){
+        MentorDAO mentorDAO = factoryDAO.getMentorDAO();
+        if(uri.length==5 && uri[4].equals("admin_create_mentor")){
+            createMentor(inputs, mentorDAO);
+        }
+        else if(uri.length==6){
+            //Mentor mentor = mentorDAO.get(Integer.parseInt(uri[5]));
+            //editMentorProfile(mentor,inputs, mentorDAO);
+        }
+        loadMentorsListFromDAO();
+        response = getResponse("templates/admin_mentors.twig", getMentorsModel());
+    }
+
+    private void manageDegreesSubpage(String[] uri, Map inputs){
+        DegreeDAO degreeDAO = factoryDAO.getDegreeDAO();
+        if(uri.length==5){
+            createDegree(inputs, degreeDAO);
+        }
+        else if(uri.length==6){
+            Degree degree = degreeDAO.get(Integer.parseInt(uri[5]));
+            editDegree(degree, inputs, degreeDAO);
+        }
+        loadDegreesListFromDAO();
+        response = getResponse("templates/admin_degrees.twig", getDegreesModel());
+    }
+
+    private void manageClassesSubpage(String[] uri, Map inputs){
+        ClassroomDAO classroomDAO = factoryDAO.getClassroomDAO();
+        if(uri.length==5){
+            createClassroom(inputs, classroomDAO);
+        }
+        else if(uri.length==6){
+            Classroom classroom = classroomDAO.get(Integer.parseInt(uri[5]));
+            editClassroom(classroom,inputs, classroomDAO);
+        }
+        loadClassesListFromDAO();
+        response = getResponse("templates/admin_classes.twig", getClassesModel());
     }
 
     private String[] getSplittedURI(HttpExchange httpExchange){
@@ -166,7 +190,6 @@ public class AdminController implements HttpHandler {
         String[] pairs = formData.split("&");
         for (String pair : pairs) {
             String[] keyValue = pair.split("=");
-            // We have to decode the value because it's urlencoded. see: https://en.wikipedia.org/wiki/POST_(HTTP)#Use_for_submitting_web_forms
             String value = new URLDecoder().decode(keyValue[1], "UTF-8");
             map.put(keyValue[0], value);
         }
@@ -174,28 +197,25 @@ public class AdminController implements HttpHandler {
     }
 
     //METHOD GET
-
-    /*
-    private JtwigModel getAdminData(){
-        AdminDAO adminDAO = new AdminDAO();
-        Admin admin = adminDAO.get(1); //SKĄD TUTAJ WZAIC ID ZALOGOWANEGO ADMINA
-
-        model.with("admin_profile", admin);
+    private JtwigModel getAdminData(Integer id){
+        //AdminDAO adminDAO = factoryDAO.getAdminDAO;
+        //Admin admin = adminDAO.get(id); //SKĄD TUTAJ WZAIC ID ZALOGOWANEGO ADMINA
+        //model.with("admin_profile", admin);
         return model;
     }
 
     private void loadMentorsListFromDAO(){
-        MentorDAO mentorDAO = new MentorDAO();
-        mentors = mentorDAO.getList();
+        MentorDAO mentorDAO = factoryDAO.getMentorDAO();
+        //mentors = mentorDAO.getList();
     }
-    */
+
     private JtwigModel getMentorsModel(){
         model.with("mentors", mentors);
         return model;
     }
 
     private void loadClassesListFromDAO(){
-        ClassroomDAO classroomDAO = new ClassroomDAO();
+        ClassroomDAO classroomDAO = factoryDAO.getClassroomDAO();
         classrooms = classroomDAO.getList();
     }
 
@@ -205,7 +225,7 @@ public class AdminController implements HttpHandler {
     }
 
     private void loadDegreesListFromDAO(){
-        DegreeDAO degreeDAO = new DegreeDAO();
+        DegreeDAO degreeDAO = factoryDAO.getDegreeDAO();
         degrees = degreeDAO.getList();
     }
 
@@ -215,47 +235,62 @@ public class AdminController implements HttpHandler {
     }
 
     private JtwigModel getMentorById(int id){
-        model.with("mentor", mentors.get(id) );
+        MentorDAO mentorDAO = factoryDAO.getMentorDAO();
+        //model.with("mentor", mentorDAO.get(id));
         return model;
     }
 
     private JtwigModel getClassById(int id){
-        model.with("classroom", classrooms.get(id) );
+        ClassroomDAO classroomDAO= factoryDAO.getClassroomDAO();
+        model.with("classroom", classroomDAO.get(id) );
         return model;
     }
 
     private JtwigModel getDegreeById(int id){
-        model.with("degree", degrees.get(id) );
+        DegreeDAO degreeDAO = factoryDAO.getDegreeDAO();
+        model.with("degree", degreeDAO.get(id) );
         return model;
     }
 
     //METHOD POST
-    private void editAdminProfile(){
-
+    private void editAdminProfile(Admin admin, Map inputs){
+        admin.setPassword(inputs.get("password").toString());
+        admin.setEmail(inputs.get("email").toString());
+        //AdminDAO adminDAO = factoryDAO.getAdminDAO();
+        //adminDAO.update(admin);
     }
 
-    private void createMentor(Map inputs){
+    private void createMentor(Map inputs, MentorDAO mentorDAO){
         Mentor mentor = new Mentor(inputs.get("login").toString(), inputs.get("password").toString(), inputs.get("firstName").toString(), inputs.get("lastName").toString(), inputs.get("email").toString(),"mentor");
+        mentorDAO.add(mentor);
     }
 
-    private void editMentorProfile(){
-
+    private void editMentorProfile(Mentor mentor, Map inputs, MentorDAO mentorDAO){
+        mentor.setLastName(inputs.get("lastName").toString());
+        mentor.setPassword(inputs.get("password").toString());
+        mentor.setEmail(inputs.get("email").toString());
+        //mentor.setLastName(inputs.get("class1").toString());
+        mentorDAO.update(mentor);
     }
 
-    private void createClassroom(Map inputs){
+    private void createClassroom(Map inputs, ClassroomDAO classroomDAO){
         Classroom classroom = new Classroom(inputs.get("classroomName").toString());
-
+        classroomDAO.add(classroom);
     }
 
-    private void editClassroom(){
-
+    private void editClassroom(Classroom classroom, Map inputs, ClassroomDAO classroomDAO){
+        classroom.setName(inputs.get("className").toString());
+        classroomDAO.update(classroom);
     }
 
-    private void createDegree(Map inputs){
+    private void createDegree(Map inputs, DegreeDAO degreeDAO){
         Degree degree = new Degree(inputs.get("degreeName").toString(), Integer.parseInt(inputs.get("minCoolcoins").toString()));
+        degreeDAO.add(degree);
     }
 
-    private void editDegree(){
-
+    private void editDegree(Degree degree, Map inputs, DegreeDAO degreeDAO){
+        degree.setName(inputs.get("degreeName").toString());
+        degree.setMinEarnedCoolcoins(Integer.parseInt(inputs.get("minCoolcoins").toString()));
+        degreeDAO.update(degree);
     }
 }

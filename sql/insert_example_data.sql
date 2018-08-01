@@ -17,6 +17,7 @@ VALUES
 INSERT INTO appuser
 (login, password, first_name, last_name, email, appuser_type)
 VALUES
+('codecooler', '123', 'Jerzy', 'Jerzowski', 'jez123@gmail.com', 'admin'),
 ('jerzyjerzowski', 'a', 'Jerzy', 'Jerzowski', 'jez123@gmail.com', 'admin'),
 ('marekgrzybek', 'm',  'Marek', 'Grzybek', 'marekg@gmail.com', 'mentor'),
 ('ds', 'm',  'Dominik', 'Starzyk', 'dominik@gmail.com', 'mentor'),

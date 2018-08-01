@@ -48,13 +48,13 @@
     <div class="flexbox-container">
         <form mthod="POST">
             <div>
-                <h2>{{ degree.degreeName() }}</h2>
+                <h2>{{ degree.getName() }}</h2>
                 <p class="nameinput">Name:</p>
-                <input class="profilebox" type="text" name="degreeName" value="{{ degree.degreeName() }}">
+                <input class="profilebox" type="text" name="degreeName" value="{{ degree.getName() }}">
             </div>
             <div>
                 <p class="nameinput"> Minimum coolcoins:</p>
-                <input class="profilebox" type="text" name="minCoolcoins" value="{{ degree.getMinCoolcoins() }}">
+                <input class="profilebox" type="text" name="minCoolcoins" value="{{ degree.getMinEarnedCoolcoins() }}">
             </div>
             <div>
                 <input class="submitbutton" type="submit" value="Save changes">
