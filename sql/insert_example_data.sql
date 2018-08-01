@@ -1,55 +1,74 @@
 BEGIN;
-INSERT INTO Classroom
+INSERT INTO classroom
 (classroom_name)
 VALUES
-('python'),
-('java');
+('2017.2 Krk'),
+('2017.3 Krk'),
+('2018.1 Krk');
 
-INSERT INTO Degree
+INSERT INTO degree
 (degree_name,  min_earned_coolcoins)
 VALUES
-('beginner', 200),
-('master', 400),
-('expert', 800),
-('jez', 2000);
+('Newbie', 0),
+('Intermediate', 50),
+('Experienced', 150),
+('Master', 300);
 
-INSERT INTO Appuser
+INSERT INTO appuser
 (login, password, first_name, last_name, email, appuser_type)
 VALUES
-('adamszmidt', 'a', 'adam', 'szmidt', 'aszmidt92@gmail.com', 'codecooler'),
-('marekgrzybek', 'm',  'marek', 'grzybek', 'marekg@gmail.com', 'mentor'),
-('przemyslawpolczak', 'p', 'przemyslaw', 'polczak', 'przemyslaw.polczak@gmail.com', 'codecooler'),
-('jerzyjerzowski', 'j', 'jerzy', 'jerzowski', 'jez123@gmail.com', 'admin');
+('jerzyjerzowski', 'a', 'Jerzy', 'Jerzowski', 'jez123@gmail.com', 'admin'),
+('marekgrzybek', 'm',  'Marek', 'Grzybek', 'marekg@gmail.com', 'mentor'),
+('ds', 'm',  'Dominik', 'Starzyk', 'dominik@gmail.com', 'mentor'),
+('ak', 'm',  'Agnieszka', 'Koszany', 'agnieszka@gmail.com', 'mentor'),
+('kg', 'm',  'Konrad', 'Gadzina', 'konrad@gmail.com', 'mentor'),
+('przemyslawpolczak', 'c', 'Przemyslaw', 'polczak', 'przemyslaw.polczak@gmail.com', 'codecooler'),
+('angel', 'c', 'Angelika', 'Nieduziak', 'a.n@gmail.com', 'codecooler'),
+('eliza', 'c', 'Eliza', 'Golec', 'eliza@gmail.com', 'codecooler'),
+('adamszmidt', 'c', 'Adam', 'Szmidt', 'aszmidt92@gmail.com', 'codecooler'),
+('olka', 'c', 'Ola', 'Kowalska', 'kowalska_ola.@gmail.com', 'codecooler');
 
 COMMIT;
 
 
 BEGIN;
-INSERT INTO Codecooler
-(appuser_login, classroom_id, earned_coolcoins )
+INSERT INTO codecooler
+(appuser_login, classroom_id, earned_coolcoins, wallet)
 VALUES
-('adamszmidt', 1, 44),
-('przemyslawpolczak', 1, 222);
+('angel', 1, 44, 1),
+('eliza', 1, 160, 40),
+('adamszmidt', 1, 66, 5),
+('olka', 3, 2, 1),
+('przemyslawpolczak', 1, 301, 22);
 
 INSERT INTO Mentor
 (Appuser_login)
 VALUES
-('marekgrzybek');
+('marekgrzybek'),
+('ds'),
+('ak'),
+('kg');
 
 INSERT INTO Mentor_classroom
 (mentor_id, classroom_id)
 VALUES
-(1, 1);
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 3),
+(3, 2),
+(4, 2),
+(4, 3);
 
 INSERT INTO Artifact
 (artifact_name, artifact_description, cost, category)
 VALUES
-('Combat training', 'Private mentoring', 50, 'I'),
-('Sanctuary', 'You can spend a day in home office', 300, 'I'),
-('Time Travel', 'Extend SI week assignment deadline by one day', 500, 'I'),
-('Tome of knowledge', 'Extra material for the current topic',  500, 'T'),
-('Summon Code Elemental','Mentor joins a students'' team for a one hour', 1000, 'T'),
-('Circle of Sorcery', '60 min workshop by a mentor(s) of the chosen topic', 1000, 'T');
+('Day off', 'Free day of codecool', 20, 'solo'),
+('Private mentoring', 'Private consultation with mentor', 2, 'solo'),
+('Additional day', 'Extend SI week assignment deadline by one day', 15, 'solo'),
+('Extra knowledge', 'Extra material for the current topic',  30, 'team'),
+('Support in TW','Mentor joins a codecooler team for one hour', 24, 'team'),
+('Mentor transform', 'Mentor have to dress up', 30, 'team');
 
 COMMIT;
 
@@ -57,14 +76,23 @@ BEGIN;
 INSERT INTO Codecooler_artifact
 (codecooler_id, artifact_id, purchase_date, use_date)
 VALUES
-(1, 1, '2018-07-03 08:44:44', '2018-07-04 11:44:44' );
+(1, 1, '2018-07-03 08:44:44', '2018-07-04 11:44:44'),
+(1, 3, '2018-07-22 09:00:00', '2018-07-27 15:00:00');
+
+INSERT INTO Codecooler_artifact
+(codecooler_id, artifact_id, purchase_date)
+VALUES
+(1, 2, '2018-06-03 13:33:00'),
+(1, 3, '2018-07-28 09:00:00');
 
 INSERT INTO Quest
 (quest_name, quest_description, prize, category)
 VALUES
-('Exploring a dungeon', 'Finishing a Teamwork week', 100, 'Basic'),
-('Solving the magic puzzle', 'Finishing an SI assignment', 100, 'Basic'),
-('Spot trap', 'Spot a major mistake in the assignment', 50, 'Extra');
+('Complete SI', 'Complete your TW in time', 1, 'Basic'),
+('Complete SI', 'Complete your SI in time', 1, 'Basic'),
+('Workshop', 'Help to ornanize workshop for fellow students', 10, 'Extra'),
+('Demo', 'Presentation on demo day', 10, 'Extra'),
+('Company interview', 'Going to a company interview', 5, 'Extra');
 
 COMMIT;
 
@@ -73,7 +101,9 @@ BEGIN;
 INSERT INTO Codecooler_quest
 (codecooler_id, quest_id)
 VALUES
-(1, 1);
+(1, 1),
+(1, 3),
+(2, 2);
 
 INSERT INTO Team
 (artefact_id, leader_id)
