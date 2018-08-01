@@ -1,5 +1,7 @@
 package com.codecool.controllers;
 
+import com.codecool.model.*;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -48,10 +50,10 @@ public class AdminController implements HttpHandler {
         String mainSubpage = uri[3];
         model = JtwigModel.newModel();
         if (mainSubpage.equals("profile")) {
-            response = getResponse("templates/admin_profile.twig", getAdminData());
+            //response = getResponse("templates/admin_profile.twig", getAdminData());
         }
         else if (mainSubpage.equals("mentors")) {
-            loadMentorsListFromDAO();
+            //loadMentorsListFromDAO();
             response = getResponse("templates/admin_mentors.twig", getMentorsModel());
             if(uri.length==5 && uri[4].equals("admin_create_mentor")){
                 response = getResponse("templates/admin_create_mentor.twig");
@@ -84,7 +86,7 @@ public class AdminController implements HttpHandler {
             }
         }
         else {
-            response = getResponse("templates/admin_profile.twig", getAdminData());
+            //response = getResponse("templates/admin_profile.twig", getAdminData());
         }
         return response;
     }
@@ -102,7 +104,7 @@ public class AdminController implements HttpHandler {
 
         if (mainSubpage.equals("profile")) {
             editAdminProfile();
-            response = getResponse("templates/admin_profile.twig", getAdminData());
+            //response = getResponse("templates/admin_profile.twig", getAdminData());
         }
         else if (mainSubpage.equals("mentors")) {
             if(uri.length==5 && uri[4].equals("admin_create_mentor")){
@@ -111,7 +113,7 @@ public class AdminController implements HttpHandler {
             else if(uri.length==6){
                 editMentorProfile();
             }
-            loadMentorsListFromDAO();
+            //loadMentorsListFromDAO();
             response = getResponse("templates/admin_mentors.twig", getMentorsModel());
         }
         else if (mainSubpage.equals("classes")) {
@@ -171,8 +173,9 @@ public class AdminController implements HttpHandler {
         return map;
     }
 
-
     //METHOD GET
+
+    /*
     private JtwigModel getAdminData(){
         AdminDAO adminDAO = new AdminDAO();
         Admin admin = adminDAO.get(1); //SKĄD TUTAJ WZAIC ID ZALOGOWANEGO ADMINA
@@ -185,7 +188,7 @@ public class AdminController implements HttpHandler {
         MentorDAO mentorDAO = new MentorDAO();
         mentors = mentorDAO.getList();
     }
-
+    */
     private JtwigModel getMentorsModel(){
         model.with("mentors", mentors);
         return model;
@@ -232,7 +235,7 @@ public class AdminController implements HttpHandler {
     }
 
     private void createMentor(Map inputs){
-        Mentor mentor = new Mentor(inputs.get("firstName"), inputs.get("lastName"), inputs.get("login"), inputs.get("password"), inputs.get("email"));
+        Mentor mentor = new Mentor(inputs.get("login").toString(), inputs.get("password").toString(), inputs.get("firstName").toString(), inputs.get("lastName").toString(), inputs.get("email").toString(),"mentor");
     }
 
     private void editMentorProfile(){
@@ -240,7 +243,7 @@ public class AdminController implements HttpHandler {
     }
 
     private void createClassroom(Map inputs){
-        Classroom classroom = new Classroom(inputs.get("classroomName"));
+        Classroom classroom = new Classroom(inputs.get("classroomName").toString());
 
     }
 
@@ -249,7 +252,7 @@ public class AdminController implements HttpHandler {
     }
 
     private void createDegree(Map inputs){
-        Degree degree = new Degree(inputs.get("degreeName"), inputs.get("minCoolcoins"));
+        Degree degree = new Degree(inputs.get("degreeName").toString(), Integer.parseInt(inputs.get("minCoolcoins").toString()));
     }
 
     private void editDegree(){
