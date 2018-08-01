@@ -2,6 +2,7 @@ package com.codecool;
 
 import com.codecool.controllers.LoginController;
 import com.codecool.controllers.MentorController;
+import com.codecool.controllers.StaticController;
 import com.sun.net.httpserver.HttpServer;
 
 import java.net.InetSocketAddress;
@@ -12,6 +13,7 @@ public class App {
 
         server.createContext("/login", new LoginController());
         server.createContext("/mentor", new MentorController());
+        server.createContext("/static", new StaticController());
         server.setExecutor(null);
 
         server.start();
