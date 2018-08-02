@@ -65,7 +65,19 @@ public class MentorController implements HttpHandler {
     }
 
     private void editArtifact(int id, Map<String, String> data) {
+        ArtifactDAO artifactDAO = factoryDAO.getArtifactDAO();
+        Artifact artifact = artifactDAO.get(id);
+        String name = data.get("artifact_name");
+        String description = data.get("artifact_description");
+        int cost = Integer.valueOf(data.get("cost"));
+        String category = data.get("category");
 
+        artifact.setName(name);
+        artifact.setDescription(description);
+        artifact.setCost(cost);
+        artifact.setCategory(category);
+
+        artifactDAO.update(artifact);
     }
 
     private void editQuest(int id, Map<String, String> data) {
