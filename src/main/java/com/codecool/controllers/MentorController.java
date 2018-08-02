@@ -199,9 +199,12 @@ public class MentorController implements HttpHandler {
     }
 
     private JtwigModel getJtwigModel(String[] uridata) {
-        List<Codecooler> codecoolers = factoryDAO.getCodecoolerDAO().getList();
-        List<Quest> quests = factoryDAO.getQuestDAO().getList();
-        List<Artifact> artifacts = factoryDAO.getArtifactDAO().getList();
+        CodecoolerDAO codecoolerDAO = factoryDAO.getCodecoolerDAO();
+        QuestDAO questDAO = factoryDAO.getQuestDAO();
+        ArtifactDAO artifactDAO = factoryDAO.getArtifactDAO();
+        List<Codecooler> codecoolers = codecoolerDAO.getList();
+        List<Quest> quests = questDAO.getList();
+        List<Artifact> artifacts = artifactDAO.getList();
         JtwigModel jtwigModel = JtwigModel.newModel();
 
         jtwigModel.with("mentor", mentor);
@@ -211,10 +214,9 @@ public class MentorController implements HttpHandler {
 
         if (isEdit(uridata)) {
             int id = getId(uridata);
-            int index = id - 1;
-            jtwigModel.with("codecooler", codecoolers.get(index));
-            jtwigModel.with("quest", quests.get(index));
-            jtwigModel.with("artifact", artifacts.get(index));
+            jtwigModel.with("codecooler", codecoolerDAO.get(id));
+            jtwigModel.with("quest", questDAO.get(id));
+            jtwigModel.with("artifact", artifactDAO.get(id));
         }
 
         return jtwigModel;
