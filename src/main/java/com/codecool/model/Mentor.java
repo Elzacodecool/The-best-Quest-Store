@@ -35,6 +35,14 @@ public class Mentor extends AppUser {
         return this.classroomList;
     }
 
+    public void setClassroomList(List<Classroom> classroomList) {
+        this.classroomList = classroomList;
+    }
+
+    public void addClassroom(Classroom classroom) {
+        this.classroomList.add(classroom);
+    }
+
     public String toString() {
 
         StringBuilder classrooms = null;
@@ -42,12 +50,13 @@ public class Mentor extends AppUser {
         if (this.classroomList != null) {
             classrooms = new StringBuilder();
             for (Classroom classroom : this.classroomList) {
+                classrooms.append("\n");
                 classrooms.append(classroom.toString());
                 classrooms.append(", ");
             }
         }
 
-        return String.format("[Mentor] login: %s, id: %d, classrooms: %s", 
+        return String.format("[Mentor] login: %s, id: %d, \nclassrooms: %s", 
                             this.login, this.id, classrooms);
     }
 
