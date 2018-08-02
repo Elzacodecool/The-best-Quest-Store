@@ -35,7 +35,7 @@ public class MentorController implements HttpHandler {
         Map<String, String> data = Common.getDataFromRequest(httpExchange);
 
         if (isHomePage(uriData) || isMenu(uriData)) {
-            editProfile(httpExchange);
+            editProfile(data);
             return;
         }
 
@@ -44,11 +44,11 @@ public class MentorController implements HttpHandler {
         if (isAdd(uriData)) {
             switch (title) {
                 case "codecoolers":
-                    addCodecooler(httpExchange);
+                    addCodecooler(data);
                 case "quests":
-                    addQuest(httpExchange);
+                    addQuest(data);
                 case "artifacts":
-                    addArtifact(httpExchange);
+                    addArtifact(data);
             }
         }
         else if (isEdit(uriData)) {
@@ -57,18 +57,18 @@ public class MentorController implements HttpHandler {
                 case "codecoolers":
                     editCodecooler(id, data);
                 case "quests":
-                    editQuest(httpExchange);
+                    editQuest(id, data);
                 case "artifacts":
-                    editArtifact(httpExchange);
+                    editArtifact(id, data);
             }
         }
     }
 
-    private void editArtifact(HttpExchange httpExchange) {
+    private void editArtifact(int id, Map<String, String> data) {
 
     }
 
-    private void editQuest(HttpExchange httpExchange) {
+    private void editQuest(int id, Map<String, String> data) {
 
     }
 
@@ -87,20 +87,29 @@ public class MentorController implements HttpHandler {
         codecoolerDAO.update(codecooler);
     }
 
-    private void addArtifact(HttpExchange httpExchange) {
+    private void addArtifact(Map<String, String> data) {
 
     }
 
-    private void addQuest(HttpExchange httpExchange) {
+    private void addQuest(Map<String, String> data) {
+
+
 
     }
 
-    private void addCodecooler(HttpExchange httpExchange) {
+    private void addCodecooler(Map<String, String> data) {
+        String login = data.get("login");
+        String password = data.get("password");
+        String firstName = data.get("first_name");
+        String lastName = data.get("last_name");
+        String email = data.get("email");
+        String appuserType = data.get("appuser_type");
+        Codecooler codecooler = new Codecooler(login, password, firstName, lastName, email, appuserType);
 
+        factoryDAO.getCodecoolerDAO();
     }
 
-    private void editProfile(HttpExchange httpExchange) {
-        Map<String, String> data = Common.getDataFromRequest(httpExchange);
+    private void editProfile(Map<String, String> data) {
         mentor.setPassword(data.get("password"));
         mentor.setEmail(data.get("email"));
         factoryDAO.getMentorDAO().update(mentor);
