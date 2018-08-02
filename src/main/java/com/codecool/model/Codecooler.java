@@ -67,12 +67,20 @@ public class Codecooler extends AppUser {
         return this.artifactList;
     }
 
+    public void setArtifactList(List<CodecoolerArtifact> artifactList) {
+        this.artifactList = artifactList;
+    }
+
     public void addCodecoolerArtifact(CodecoolerArtifact codecoolerArtifact) {
         this.artifactList.add(codecoolerArtifact);
     }
 
     public List<CodecoolerQuest> getQuestList() {
         return this.questList;
+    }
+
+    public void setQuestList(List<CodecoolerQuest> questList) {
+        this.questList = questList;
     }
 
     public void addCodecoolerQuest(CodecoolerQuest codecoolerQuest) {
@@ -100,7 +108,7 @@ public class Codecooler extends AppUser {
             }
         }
 
-        return String.format("[Codecooler] login: %s, id: %d, classroom: %s, earnedCoolcoins: %d, wallet: %d, artifacts: %s, quests: %s", 
+        return String.format("[Codecooler] login: %s, id: %d, classroom: %s, earnedCoolcoins: %d, wallet: %d, \nartifacts: %s \nquests: %s", 
                             this.login, this.id, this.classroom.getName(), this.earnedCoolcoins, this.wallet, artifacts, quests);
     }
 
