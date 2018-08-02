@@ -38,6 +38,15 @@ public class ClassroomDAO extends CommonDAO {
         return new Classroom(Integer.valueOf(result.get("id")), result.get("classroom_name"));
     }
 
+    public Classroom get(String name) {
+        String sqlString = "SELECT * FROM classroom WHERE classroom_name = ?;";
+
+        Map<String, String> result = executeSQLSelect(connection, sqlString, name).get(0);
+
+        //Classroom(Integer id, String name)
+        return new Classroom(Integer.valueOf(result.get("id")), result.get("classroom_name"));
+    }
+
     public List<Classroom> getList() {
         String sql = String.format("SELECT * FROM classroom");
 
