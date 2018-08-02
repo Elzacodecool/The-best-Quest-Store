@@ -46,7 +46,6 @@ public class AdminController implements HttpHandler {
         }
 
         else{
-            System.out.println("post");
             servingPostMethod(httpExchange);
         }
         sendResponse(httpExchange);
