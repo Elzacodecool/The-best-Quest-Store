@@ -40,12 +40,12 @@ public class MentorController implements HttpHandler {
         final String QUESTS = "/static/templates/mentor/mentor_quests.twig";
         final String QUEST = "/static/templates/mentor/mentor_one_quest.twig";
 
-        if (uriData.length == 1) {
+        if (isHomePage(uriData)) {
             return PROFILE;
         }
 
         String title = uriData[1];
-        if (uriData.length == 2) {
+        if (isMenu(uriData)) {
             switch (title) {
                 case "profile":
                     return PROFILE;
@@ -60,21 +60,40 @@ public class MentorController implements HttpHandler {
             }
         }
 
-        String action = uriData[2];
-        if (uriData.length == 3) {
-            if (title.equals("codecoolers") && action.equals("add")) {
-                return  CODECOOLER;
-            }
-        }
-
-        String id = uriData[3];
-        if (uriData.length == 4) {
-            if (title.equals("codecoolers") && action.equals("edit") && StringUtils.isNumeric(id)) {
-                return CODECOOLER;
+        if (isAdd(uriData) || isEdit(uriData)) {
+            switch (title) {
+                case "codecoolers":
+                    return CODECOOLER;
+                case "quests":
+                    return QUEST;
+                case "artifacts":
+                    return ARTIFACT;
             }
         }
 
         return LOGIN;
+    }
+
+    private boolean isHomePage(String [] uriData) {
+        return uriData.length == 1;
+    }
+
+    private boolean isMenu(String [] uriData) {
+        return uriData.length == 2;
+    }
+
+    private boolean isAdd(String [] uriData) {
+        String action = uriData[2];
+        return uriData.length == 3 && action.equals("add");
+    }
+
+    private boolean isEdit(String [] uriData) {
+        if (uriData.length != 4) {
+            return false;
+        }
+        String action = uriData[2];
+        String id = uriData[3];
+        return action.equals("edit") && StringUtils.isNumeric(id);
     }
 
     private String [] getUriData(HttpExchange httpExchange) {
@@ -110,7 +129,6 @@ public class MentorController implements HttpHandler {
             jtwigModel.with("codecooler", codecoolers.get(0));
         }
 
-        jtwigModel.with("quests", factoryDAO.getQuestDAO().getList());
         return jtwigModel;
     }
 
