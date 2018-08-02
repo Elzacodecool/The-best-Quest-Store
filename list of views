@@ -7,7 +7,7 @@ As a admin:
 	Mentors:
 		- mentors list/view,
 			- view/edit one mentor,
-				- display mentor's students, 
+			- display mentor's students, 
 			- create new mentor.
 	Classes:
 		- class list/view,
