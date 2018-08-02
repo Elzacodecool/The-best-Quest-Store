@@ -140,7 +140,7 @@ public class MentorController implements HttpHandler {
         if (mentor != null) {
             return;
         }
-        String login = getLogin(getCookie(httpExchange));
+        String login = Common.getLogin(Common.getCookie(httpExchange));
         List<Mentor> mentors = factoryDAO.getMentorDAO().getList();
         for (Mentor mentor : mentors) {
             if (mentor.getLogin().equals(login)) {
@@ -148,6 +148,6 @@ public class MentorController implements HttpHandler {
                 return;
             }
         }
-        redirect(httpExchange, "login");
+        Common.redirect(httpExchange, "login");
     }
 }
