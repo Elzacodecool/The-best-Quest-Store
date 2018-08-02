@@ -1,7 +1,6 @@
 package com.codecool.controllers;
 
 import com.codecool.model.*;
-import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +9,6 @@ import org.jtwig.JtwigTemplate;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.HttpCookie;
 import java.util.List;
 
 public class MentorController implements HttpHandler {
@@ -22,11 +20,10 @@ public class MentorController implements HttpHandler {
         login(httpExchange);
 
         String method = httpExchange.getRequestMethod();
-        String [] uriData = getUriData(httpExchange);
 
         if (method.equals("GET")) {
-            String response = createResponse(uriData);
-            sendResponse(httpExchange, response);
+            String response = createResponse(httpExchange);
+            Common.sendResponse(httpExchange, response);
         }
     }
 
@@ -103,16 +100,12 @@ public class MentorController implements HttpHandler {
         return correctUri;
     }
 
-    private void sendResponse(HttpExchange httpExchange, String response) throws IOException {
-        httpExchange.sendResponseHeaders(200, response.length());
-        OutputStream os = httpExchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-    }
 
-    private String createResponse(String [] uridata) {
-        String filepath = chooseTwigFileByUri(uridata);
-        JtwigModel jtwigModel = getJtwigModel(uridata);
+
+    private String createResponse(HttpExchange httpExchange) {
+        String [] uriData = getUriData(httpExchange);
+        String filepath = chooseTwigFileByUri(uriData);
+        JtwigModel jtwigModel = getJtwigModel(uriData);
         JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(filepath);
         return jtwigTemplate.render(jtwigModel);
     }
@@ -156,33 +149,5 @@ public class MentorController implements HttpHandler {
             }
         }
         redirect(httpExchange, "login");
-    }
-
-    private HttpCookie getCookie(HttpExchange httpExchange) {
-        String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
-        HttpCookie cookie;
-
-        if (cookieStr != null) {  // Cookie already exists
-            cookie = HttpCookie.parse(cookieStr).get(0);
-        } else { // Create a new cookie
-            cookie = null;
-            redirect(httpExchange, "login");
-        }
-        return cookie;
-    }
-
-    private String getLogin(HttpCookie cookie) {
-        return cookie.toString().split("=")[1];
-    }
-
-    private void redirect(HttpExchange httpExchange, String location) {
-        Headers headers = httpExchange.getResponseHeaders();
-        headers.add("Location", location);
-        try {
-            httpExchange.sendResponseHeaders(302, -1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        httpExchange.close();
     }
 }
