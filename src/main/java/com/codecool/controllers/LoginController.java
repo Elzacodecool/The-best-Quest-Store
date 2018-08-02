@@ -41,7 +41,7 @@ public class LoginController implements HttpHandler {
 
         if (isCorrectLoginAndPassword(login, password)) {
             String accountType = appUserDAO.get(login).getAppuserType();
-            sendCookies(httpExchange, login);
+            Common.sendCookies(httpExchange, login);
             Common.redirect(httpExchange, accountType);
         } else {
             Common.redirect(httpExchange, "login");
@@ -57,8 +57,4 @@ public class LoginController implements HttpHandler {
     }
 
 
-    private void sendCookies(HttpExchange httpExchange, String login) {
-        HttpCookie cookie = new HttpCookie("login", login);
-        httpExchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
-    }
 }
