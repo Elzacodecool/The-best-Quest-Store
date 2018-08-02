@@ -39,7 +39,7 @@ public class MentorController implements HttpHandler {
         final String CODECOOLERS = "/static/templates/mentor_codecoolers.twig";
         final String CODECOOLER = "/static/templates/mentor_one_codecooler.twig";
         final String ARTIFACTS = "/static/templates/mentor_one_codecooler_artifacts.twig";
-        final String QUESTS = "/static/templates/mentor_one_codecooler_quests.twig";
+        final String QUESTS = "/static/templates/mentor_quests.twig";
 
         if (uriData.length == 1) {
             return PROFILE;
@@ -82,9 +82,6 @@ public class MentorController implements HttpHandler {
         String [] uriData = httpExchange.getRequestURI().toString().split("/");
         String [] correctUri = new String [uriData.length - 1];
         if (uriData.length - 1 >= 0) System.arraycopy(uriData, 1, correctUri, 0, uriData.length - 1);
-        for (String uri : correctUri) {
-            System.out.println("-" + uri);
-        }
         return correctUri;
     }
 
