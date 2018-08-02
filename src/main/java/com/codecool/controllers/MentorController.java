@@ -25,6 +25,46 @@ public class MentorController implements HttpHandler {
             String response = createResponse(httpExchange);
             Common.sendResponse(httpExchange, response);
         }
+        if (method.equals("POST")) {
+            updateData(httpExchange);
+        }
+    }
+
+    private void updateData(HttpExchange httpExchange) {
+        String [] uriData = getUriData(httpExchange);
+
+        if (isHomePage(uriData) || isMenu(uriData)) {
+            editProfile(httpExchange);
+            return;
+        }
+
+        String title = uriData[1];
+
+        if (isAdd(uriData)) {
+            switch (title) {
+                case "codecoolers":
+                    addCodecooler(httpExchange);
+                case "quests":
+                    addQuest(httpExchange);
+                case "artifacts":
+                    addArtifact(httpExchange);
+            }
+        }
+        else if (isEdit(uriData)) {
+            switch (title) {
+                case "codecoolers":
+                    editCodecooler(httpExchange);
+                case "quests":
+                    editQuest(httpExchange);
+                case "artifacts":
+                    editArtifact(httpExchange);
+            }
+        }
+    }
+
+    private void editProfile(HttpExchange httpExchange) {
+
+
     }
 
     private String chooseTwigFileByUri(String[] uriData) {
