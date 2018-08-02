@@ -95,6 +95,7 @@ public class Codecooler extends AppUser {
         if (this.artifactList != null) {
             artifacts = new StringBuilder();
             for (CodecoolerArtifact codecoolerArtifact : this.artifactList) {
+                artifacts.append("\n");
                 artifacts.append(codecoolerArtifact.toString());
                 artifacts.append(", ");
             }
@@ -103,6 +104,7 @@ public class Codecooler extends AppUser {
         if (this.questList != null) {
             quests = new StringBuilder();
             for (CodecoolerQuest codecoolerQuest : this.questList) {
+                quests.append("\n");
                 quests.append(codecoolerQuest.toString());
                 quests.append(", ");
             }
