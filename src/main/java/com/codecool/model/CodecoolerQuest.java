@@ -37,7 +37,7 @@ public class CodecoolerQuest {
     }
 
     public String toString() {
-        return String.format("\n[CodecoolerQuest] id: %d, quest name: %s, markDate: %s", 
+        return String.format("[CodecoolerQuest] id: %d, quest name: %s, markDate: %s", 
                             this.id, this.quest.getName(), this.markDate);
     }
 }

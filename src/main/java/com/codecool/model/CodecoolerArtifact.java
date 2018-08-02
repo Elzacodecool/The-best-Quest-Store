@@ -44,7 +44,7 @@ public class CodecoolerArtifact {
     }
 
     public String toString() {
-        return String.format("\n[CodecoolerArtifact] id: %d, artifact name: %s, purchaseDate: %s, usageDate: %s", 
+        return String.format("[CodecoolerArtifact] id: %d, artifact name: %s, purchaseDate: %s, usageDate: %s", 
                             this.id, this.artifact.getName(), this.purchaseDate, this.usageDate);
     }
 }
