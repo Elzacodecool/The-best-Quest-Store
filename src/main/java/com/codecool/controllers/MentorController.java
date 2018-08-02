@@ -94,16 +94,25 @@ public class MentorController implements HttpHandler {
 
     private String createResponse(String [] uridata) {
         String filepath = chooseTwigFileByUri(uridata);
+        JtwigModel jtwigModel = getJtwigModel(uridata);
+        JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(filepath);
+        return jtwigTemplate.render(jtwigModel);
+    }
+
+    private JtwigModel getJtwigModel(String[] uridata) {
         JtwigModel jtwigModel = JtwigModel.newModel();
+
         jtwigModel.with("mentor", mentor);
+
         List<Codecooler> codecoolers = factoryDAO.getCodecoolerDAO().getList();
         jtwigModel.with("codecoolers", codecoolers);
         if (uridata.length == 4) {
             System.out.println("send codecooler to twig");
             jtwigModel.with("codecooler", codecoolers.get(0));
         }
-        JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(filepath);
-        return jtwigTemplate.render(jtwigModel);
+
+        jtwigModel.with("quests", factoryDAO.getQuestDAO().getList());
+        return jtwigModel;
     }
 
     private void login(HttpExchange httpExchange) {
