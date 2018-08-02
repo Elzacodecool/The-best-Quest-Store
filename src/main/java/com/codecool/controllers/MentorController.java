@@ -132,6 +132,10 @@ public class MentorController implements HttpHandler {
         return jtwigModel;
     }
 
+    private int getId(String[] uridata) {
+        return Integer.valueOf(uridata[3]);
+    }
+
     private void login(HttpExchange httpExchange) {
         if (mentor != null) {
             return;
