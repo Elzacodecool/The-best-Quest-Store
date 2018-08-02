@@ -8,6 +8,7 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -230,7 +231,21 @@ public class MentorController implements HttpHandler {
                     return ARTIFACT;
             }
         }
+
+        if (isListItems(uriData)) {
+            String item = uriData[2];
+            if (item.equals("quests")) {
+                return QUESTS;
+            } else if (item.equals("artifacts")) {
+                return ARTIFACTS;
+            }
+        }
+
         return LOGIN;
+    }
+
+    private boolean isListItems(String[] uriData) {
+        return uriData.length == 4 && uriData[1].equals("codecoolers");
     }
 
     private boolean isHomePage(String [] uriData) {
@@ -282,9 +297,15 @@ public class MentorController implements HttpHandler {
         JtwigModel jtwigModel = JtwigModel.newModel();
 
         jtwigModel.with("mentor", mentor);
-        jtwigModel.with("codecoolers", codecoolers);
-        jtwigModel.with("quests", quests);
-        jtwigModel.with("artifacts", artifacts);
+        if (isMenu(uridata)) {
+            jtwigModel.with("codecoolers", codecoolers);
+            jtwigModel.with("quests", quests);
+            jtwigModel.with("artifacts", artifacts);
+        } else {
+            jtwigModel.with("codecoolers", new ArrayList<String>());
+            jtwigModel.with("quests", new ArrayList<String>());
+            jtwigModel.with("artifacts", new ArrayList<String>());
+        }
 
         if (isEdit(uridata)) {
             String title = uridata[1];
