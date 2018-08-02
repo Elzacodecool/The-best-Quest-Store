@@ -15,8 +15,8 @@ public class Codecooler extends AppUser {
     private List<CodecoolerArtifact> artifactList;
     private List<CodecoolerQuest> questList;
 
-    public Codecooler(String login, String password, String firstName, String lastName, String email, String appuserType) {
-        super(login, password, firstName, lastName, email, appuserType);
+    public Codecooler(String login, String password, String firstName, String lastName, String email) {
+        super(login, password, firstName, lastName, email, "codecooler");
         this.artifactList = new ArrayList<CodecoolerArtifact>();
         this.questList = new ArrayList<CodecoolerQuest>();
     }
