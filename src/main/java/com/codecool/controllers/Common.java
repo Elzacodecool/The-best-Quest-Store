@@ -72,6 +72,11 @@ final class Common {
         return cookie;
     }
 
+    static void sendCookies(HttpExchange httpExchange, String login) {
+        HttpCookie cookie = new HttpCookie("login", login);
+        httpExchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
+    }
+
     static String getLogin(HttpCookie cookie) {
         return cookie.toString().split("=")[1];
     }
