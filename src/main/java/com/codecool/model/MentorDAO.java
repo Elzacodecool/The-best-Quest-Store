@@ -17,11 +17,13 @@ public class MentorDAO extends CommonDAO {
 
     private Connection connection;
     private AppUserDAO appUserDAO;
+    private CodecoolerDAO codecoolerDAO;
     private ClassroomDAO classroomDAO;
 
     public MentorDAO(Connection connection) {
         this.connection = connection;
         appUserDAO = new AppUserDAO(connection);
+        codecoolerDAO = new CodecoolerDAO(connection);
         classroomDAO = new ClassroomDAO(connection);
     }
 
@@ -79,9 +81,9 @@ public class MentorDAO extends CommonDAO {
     }
 
     public List<Mentor> getList() {
-        String sql = String.format("SELECT * FROM mentor");
+        String sqlString  = "SELECT * FROM mentor";
 
-        List<Map<String, String>> results = executeSQLSelect(connection, sql);
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Mentor> mentors = new ArrayList<Mentor>();
 
         AppUser appUser;
@@ -100,6 +102,19 @@ public class MentorDAO extends CommonDAO {
             mentors.add(mentor);
         }
         return mentors;
+    }
+
+    public List<Codecooler> getMentorCodecoolerList(Integer id) {
+        String sqlString = "SELECT id FROM codecooler WHERE classroom_id IN " +
+                            "(SELECT classroom_id FROM mentor_classroom WHERE mentor_id = ?);";
+   
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString, id);
+        List<Codecooler> codecoolers = new ArrayList<Codecooler>();
+
+        for (Map<String, String> result : results) {
+            codecoolers.add(codecoolerDAO.get(Integer.valueOf(result.get("id"))));
+        }
+        return codecoolers;
     }
 }
 
