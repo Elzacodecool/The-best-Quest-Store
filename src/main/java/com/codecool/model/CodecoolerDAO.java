@@ -1,5 +1,8 @@
 package com.codecool.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CodecoolerDAO {
     
     public void add(Codecooler codecooler) {
@@ -14,8 +17,13 @@ public class CodecoolerDAO {
 
     }
 
-    public void getList() {
-        
+    public List<Codecooler> getList() {
+        List<Codecooler> codecoolers = new ArrayList<>();
+        Codecooler codecooler = new Codecooler("login", "pass", "name", "lname", "email", "codecooler");
+        codecoolers.add(codecooler);
+        codecoolers.add(codecooler);
+        codecoolers.add(codecooler);
+        return codecoolers;
     }
 
     public void assignCodecoolerToClass() {
