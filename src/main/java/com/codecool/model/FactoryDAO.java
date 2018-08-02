@@ -39,7 +39,7 @@ public class FactoryDAO {
     }
 
     public CodecoolerDAO getCodecoolerDAO() {
-        return new CodecoolerDAO();
+        return new CodecoolerDAO(createConnection());
     }
 
     public DegreeDAO getDegreeDAO() {
@@ -47,7 +47,7 @@ public class FactoryDAO {
     }
 
     public MentorDAO getMentorDAO() {
-        return new MentorDAO();
+        return new MentorDAO(createConnection());
     }
 
     public QuestDAO getQuestDAO() {
@@ -55,7 +55,7 @@ public class FactoryDAO {
     }
 
     public TeamDAO getTeamDAO() {
-        return new TeamDAO();
+        return new TeamDAO(createConnection());
     }
 
 }

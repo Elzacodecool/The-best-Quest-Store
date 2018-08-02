@@ -27,4 +27,9 @@ public class CodecoolerQuest {
     public void setMarkDate(Date markDate) {
         this.markDate = markDate;
     }
+
+    public String toString() {
+        return String.format("[CodecoolerQuest] id: %d, quest name: %s, markDate: %s", 
+                            this.id, this.quest.getName(), this.markDate.toString());
+    }
 }

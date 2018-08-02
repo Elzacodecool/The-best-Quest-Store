@@ -72,9 +72,10 @@ CREATE TABLE codecooler_quest (
 
 CREATE TABLE team (
     id SERIAL PRIMARY KEY,
-    artefact_id INTEGER REFERENCES artifact(id),
+    team_name VARCHAR(40),
+    artifact_id INTEGER REFERENCES artifact(id),
     leader_id INTEGER REFERENCES codecooler(id),
-    status VARCHAR(10) DEFAULT 'Pending'
+    status VARCHAR(25) DEFAULT 'Pending'
 );
 
 CREATE TABLE codecooler_team (
