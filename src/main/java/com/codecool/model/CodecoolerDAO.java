@@ -157,6 +157,8 @@ public class CodecoolerDAO extends CommonDAO {
 
         Classroom classroom;
         AppUser appUser;
+        Integer id;
+        Codecooler codecooler;
 
         //Codecooler(Integer id, AppUser appUser, Classroom classroom, Integer earnedCoolcoins, Integer wallet)
         for (Map<String, String> result : results) {
@@ -164,9 +166,15 @@ public class CodecoolerDAO extends CommonDAO {
             classroom = classroomDAO.get(Integer.valueOf(result.get("classroom_id")));
             appUser = appUserDAO.get(result.get("appuser_login"));
 
-            codecoolers.add(new Codecooler(Integer.valueOf(result.get("id")), appUser, classroom, 
-                                            Integer.valueOf(result.get("earned_coolcoins")), 
-                                            Integer.valueOf(result.get("wallet"))));
+            id = Integer.valueOf(result.get("id"));
+            codecooler = new Codecooler(id, appUser, classroom, 
+                                        Integer.valueOf(result.get("earned_coolcoins")), 
+                                        Integer.valueOf(result.get("wallet")));
+
+            codecooler.setArtifactList(getCodecoolerArtifactList(id)); 
+            codecooler.setQuestList(getCodecoolerQuestList(id)); 
+
+            codecoolers.add(codecooler);
         }
         return codecoolers;
     }
