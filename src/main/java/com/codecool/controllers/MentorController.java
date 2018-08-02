@@ -57,10 +57,13 @@ public class MentorController implements HttpHandler {
             switch (title) {
                 case "codecoolers":
                     addCodecooler(data);
+                    break;
                 case "quests":
                     addQuest(data);
+                    break;
                 case "artifacts":
                     addArtifact(data);
+                    break;
             }
         }
         else if (isEdit(uriData)) {
@@ -68,10 +71,13 @@ public class MentorController implements HttpHandler {
             switch (title) {
                 case "codecoolers":
                     editCodecooler(id, data);
+                    break;
                 case "quests":
                     editQuest(id, data);
+                    break;
                 case "artifacts":
                     editArtifact(id, data);
+                    break;
             }
         }
     }
