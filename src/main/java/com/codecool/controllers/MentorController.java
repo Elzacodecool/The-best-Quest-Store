@@ -263,10 +263,19 @@ public class MentorController implements HttpHandler {
         jtwigModel.with("artifacts", artifacts);
 
         if (isEdit(uridata)) {
+            String title = uridata[1];
             int id = getId(uridata);
-            jtwigModel.with("codecooler", codecoolerDAO.get(id));
-            jtwigModel.with("quest", questDAO.get(id));
-            jtwigModel.with("artifact", artifactDAO.get(id));
+            switch (title) {
+                case "codecoolers":
+                    jtwigModel.with("codecooler", codecoolerDAO.get(id));
+                    break;
+                case "quests":
+                    jtwigModel.with("quest", questDAO.get(id));
+                    break;
+                case "artifacts":
+                    jtwigModel.with("artifact", artifactDAO.get(id));
+                    break;
+            }
         }
 
         return jtwigModel;
