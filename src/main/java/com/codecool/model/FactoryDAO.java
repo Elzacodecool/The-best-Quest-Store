@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class FactoryDAO {
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/";
     private static final String DB_NAME = "queststore";
-    private static final String userName = "codecooler";
-    private static final String password = "123";
+    private static final String userName = "adam";
+    private static final String password = "adam12";
 
 
     private Connection createConnection() {
@@ -39,7 +39,7 @@ public class FactoryDAO {
     }
 
     public CodecoolerDAO getCodecoolerDAO() {
-        return new CodecoolerDAO();
+        return new CodecoolerDAO(createConnection());
     }
 
     public DegreeDAO getDegreeDAO() {
@@ -47,7 +47,7 @@ public class FactoryDAO {
     }
 
     public MentorDAO getMentorDAO() {
-        return new MentorDAO();
+        return new MentorDAO(createConnection());
     }
 
     public QuestDAO getQuestDAO() {
@@ -55,7 +55,7 @@ public class FactoryDAO {
     }
 
     public TeamDAO getTeamDAO() {
-        return new TeamDAO();
+        return new TeamDAO(createConnection());
     }
 
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 /* columns in DB:
         id
         degree_name
-        min_coolcoins
+        min_earned_coolcoins
 */
 public class DegreeDAO extends CommonDAO {
 
@@ -20,13 +20,13 @@ public class DegreeDAO extends CommonDAO {
 
     public int add(Degree degree) {
         
-        String sqlString = "INSERT INTO degree (degree_name, min_coolcoins) VALUES (?, ?);";
+        String sqlString = "INSERT INTO degree (degree_name, min_earned_coolcoins) VALUES (?, ?);";
         return executeSQLUpdateDB(connection, sqlString, degree.toHashMap());
     }
 
     public int update(Degree degree) {
 
-        String sqlString = "UPDATE degree SET degree_name = ?, min_coolcoins = ? WHERE id = ?;";
+        String sqlString = "UPDATE degree SET degree_name = ?, min_earned_coolcoins = ? WHERE id = ?;";
         return executeSQLUpdateDB(connection, sqlString, degree.toHashMapWithId());
     }
 
@@ -38,7 +38,7 @@ public class DegreeDAO extends CommonDAO {
         //Degree(Integer id, String name, Integer minEarnedCoolcoins)
         return new Degree(Integer.valueOf(result.get("id")), 
                          result.get("degree_name"), 
-                         Integer.valueOf(result.get("min_coolcoins")));
+                         Integer.valueOf(result.get("min_earned_coolcoins")));
     }
 
     public List<Degree> getList() {
@@ -51,7 +51,7 @@ public class DegreeDAO extends CommonDAO {
         for (Map<String, String> result : results) {
             degrees.add(new Degree(Integer.valueOf(result.get("id")), 
                                  result.get("degree_name"), 
-                                 Integer.valueOf(result.get("min_coolcoins"))));
+                                 Integer.valueOf(result.get("min_earned_coolcoins"))));
         }
         return degrees;
     }
