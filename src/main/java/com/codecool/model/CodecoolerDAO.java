@@ -47,7 +47,7 @@ public class CodecoolerDAO extends CommonDAO {
 
     public int update(Codecooler codecooler) {
 
-        appUserDAO.update((AppUser) codecooler);
+        appUserDAO.update(codecooler);
 
         String sqlString = "UPDATE codecooler SET classroom_id = ?, earned_coolcoins = ?, wallet = ? WHERE id = ?;";
         return executeSQLUpdateDB(connection, sqlString, codecooler.toHashMapCodecoolerToUpdate());
