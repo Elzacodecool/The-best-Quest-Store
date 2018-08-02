@@ -69,7 +69,19 @@ public class MentorController implements HttpHandler {
     }
 
     private void editQuest(int id, Map<String, String> data) {
+        QuestDAO questDAO = factoryDAO.getQuestDAO();
+        Quest quest = questDAO.get(id);
+        String name = data.get("quest_name");
+        String description = data.get("quest_description");
+        int prize = Integer.valueOf(data.get("prize"));
+        String category = data.get("category");
 
+        quest.setName(name);
+        quest.setDescription(description);
+        quest.setPrize(prize);
+        quest.setCategory(category);
+
+        questDAO.update(quest);
     }
 
     private void editCodecooler(int id, Map<String, String> data) {
@@ -83,6 +95,7 @@ public class MentorController implements HttpHandler {
         codecooler.setLastName(lastName);
         codecooler.setPassword(password);
         codecooler.setEmail(email);
+//        codecooler.setClassroom(new Classroom(classroom));
 
         codecoolerDAO.update(codecooler);
     }
