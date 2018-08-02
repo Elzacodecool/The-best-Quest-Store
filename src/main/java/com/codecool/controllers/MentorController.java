@@ -311,7 +311,6 @@ public class MentorController implements HttpHandler {
 
     private void login(HttpExchange httpExchange) {
         String login = Common.getLogin(Common.getCookie(httpExchange));
-        System.out.println("login= " + login);
         List<Mentor> mentors = factoryDAO.getMentorDAO().getList();
         for (Mentor mentor : mentors) {
             if (mentor.getLogin().equals(login)) {
@@ -319,7 +318,6 @@ public class MentorController implements HttpHandler {
                 return;
             }
         }
-        System.out.println("dont look for mentor");
         Common.redirect(httpExchange, "login");
     }
 }
