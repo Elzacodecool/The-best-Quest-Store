@@ -4,17 +4,26 @@ import java.util.Date;
 
 public class CodecoolerArtifact {
 
-    private int id;
+    private Integer id;
     private Artifact artifact;
     private Date purchaseDate;
     private Date usageDate;
 
-    public CodecoolerArtifact(Artifact artifact, Date purchaseDate) {
+    public CodecoolerArtifact(Artifact artifact, Date purchaseDate, Date usageDate) {
         this.artifact = artifact;
         this.purchaseDate = purchaseDate;
+        this.usageDate = usageDate;
     }
 
-    public int getId() {
+    // data from DB
+    public CodecoolerArtifact(Integer id, Artifact artifact, Date purchaseDate, Date usageDate) {
+        this.id = id;
+        this.artifact = artifact;
+        this.purchaseDate = purchaseDate;
+        this.usageDate = usageDate;
+    }
+
+    public Integer getId() {
         return this.id;
     }
 
@@ -35,7 +44,7 @@ public class CodecoolerArtifact {
     }
 
     public String toString() {
-        return String.format("[CodecoolerArtifact] id: %d, artifact name: %s, purchaseDate: %s, usageDate: %s", 
-                            this.id, this.artifact.getName(), this.purchaseDate.toString(), this.usageDate.toString());
+        return String.format("\n[CodecoolerArtifact] id: %d, artifact name: %s, purchaseDate: %s, usageDate: %s", 
+                            this.id, this.artifact.getName(), this.purchaseDate, this.usageDate);
     }
 }
