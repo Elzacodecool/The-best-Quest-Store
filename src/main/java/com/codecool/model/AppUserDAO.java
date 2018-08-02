@@ -56,9 +56,9 @@ public class AppUserDAO extends CommonDAO {
     }
 
     public List<AppUser> getList() {
-        String sql = String.format("SELECT * FROM appuser");
+        String sqlString = "SELECT * FROM appuser";
 
-        List<Map<String, String>> results = executeSQLSelect(connection, sql);
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<AppUser> appUsers = new ArrayList<AppUser>();
 
         //AppUser(String login, String password, String firstName, String lastName, String email, String appuserType)

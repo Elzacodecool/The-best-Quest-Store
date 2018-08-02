@@ -46,9 +46,9 @@ public class QuestDAO extends CommonDAO {
     }
 
     public List<Quest> getList() {
-        String sql = String.format("SELECT * FROM quest");
+        String sqlString = "SELECT * FROM quest";
 
-        List<Map<String, String>> results = executeSQLSelect(connection, sql);
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Quest> quests = new ArrayList<Quest>();
 
         //Quest(Integer id, String name, String description, Integer prize, String category)

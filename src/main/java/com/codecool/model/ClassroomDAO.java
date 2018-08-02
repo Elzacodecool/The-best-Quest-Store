@@ -39,9 +39,9 @@ public class ClassroomDAO extends CommonDAO {
     }
 
     public List<Classroom> getList() {
-        String sql = String.format("SELECT * FROM classroom");
+        String sqlString = "SELECT * FROM classroom";
 
-        List<Map<String, String>> results = executeSQLSelect(connection, sql);
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Classroom> classrooms = new ArrayList<Classroom>();
 
         //Classroom(Integer id, String name)

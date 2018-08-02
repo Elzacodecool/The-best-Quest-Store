@@ -55,9 +55,9 @@ public class TeamDAO extends CommonDAO {
     }
 
     public List<Team> getList() {
-        String sql = String.format("SELECT * FROM team");
+        String sqlString = "SELECT * FROM team";
 
-        List<Map<String, String>> results = executeSQLSelect(connection, sql);
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Team> teams = new ArrayList<Team>();
 
         Artifact artifact;

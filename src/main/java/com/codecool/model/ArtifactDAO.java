@@ -46,9 +46,9 @@ public class ArtifactDAO extends CommonDAO {
     }
 
     public List<Artifact> getList() {
-        String sql = String.format("SELECT * FROM artifact");
+        String sqlString = "SELECT * FROM artifact";
 
-        List<Map<String, String>> results = executeSQLSelect(connection, sql);
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Artifact> artifacts = new ArrayList<Artifact>();
 
         //Artifact(Integer id, String name, String description, Integer cost, String category)
