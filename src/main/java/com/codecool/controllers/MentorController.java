@@ -27,7 +27,19 @@ public class MentorController implements HttpHandler {
         }
         if (method.equals("POST")) {
             updateData(httpExchange);
+            redirectToPreviousPage(httpExchange);
         }
+    }
+
+    private void redirectToPreviousPage(HttpExchange httpExchange) {
+        String[] uri = getUriData(httpExchange);
+        String newLocation;
+        if (isHomePage(uri)) {
+            newLocation = "/" + uri[0];
+        } else {
+            newLocation = "/" + uri[0] + "/" + uri[1];
+        }
+        Common.redirect(httpExchange, newLocation);
     }
 
     private void updateData(HttpExchange httpExchange) {
@@ -292,10 +304,8 @@ public class MentorController implements HttpHandler {
     }
 
     private void login(HttpExchange httpExchange) {
-        if (mentor != null) {
-            return;
-        }
         String login = Common.getLogin(Common.getCookie(httpExchange));
+        System.out.println("login= " + login);
         List<Mentor> mentors = factoryDAO.getMentorDAO().getList();
         for (Mentor mentor : mentors) {
             if (mentor.getLogin().equals(login)) {
@@ -303,6 +313,7 @@ public class MentorController implements HttpHandler {
                 return;
             }
         }
+        System.out.println("dont look for mentor");
         Common.redirect(httpExchange, "login");
     }
 }
