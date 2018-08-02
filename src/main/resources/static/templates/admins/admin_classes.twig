@@ -14,26 +14,26 @@
     <nav class="navbar">
         <div class="navbar-store">
         <img class="navbar-logo" src="/static/images/logo.png" alt="Logo Codecool">
-            Quest Store
+        Quest Store
         </div>
         <ul class="navbar-list">
-            <li>
-                <a href="/admin/profile">
-                    Profile
-                </a>
-            </li>
-            <li>
-                <a href="/admin/mentors">
-                    Mentors
-                </a>
-            </li>
-            <li>
-                <a href="/admin/classes">
-                    Classes
-                </a>
-            </li>
-            <li>
-                <a href="/admin/degrees">
+        <li>
+            <a href="/admin/profile">
+            Profile
+            </a>
+        </li>
+        <li>
+            <a href="/admin/mentors">
+            Mentors
+            </a>
+        </li>
+        <li>
+            <a href="/admin/classes">
+            Classes
+            </a>
+        </li>
+        <li>
+            <a href="/admin/degrees">
             Degrees
             </a>
         </li>
@@ -47,27 +47,31 @@
 
     <section class="content-section">
         <div class="div-content-section">
-            <h1>Degrees</h1>
+            <h1>Classes</h1>
             <table>
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Minimum coolcoins</th>
+                        <th>Assign mentors</th>
+                        <th>Codecoolers</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-			        {% for degree in degrees %}
-                        <tr>
-                            <td>{{ degree.getName() }}</td>
-                            <td>{{ degree.getMinEarnedCoolcoins() }}</td>
-                            <td><a href="/admin/degrees/admin_one_degree/{{ degree.getId() }}"><img class="table-img" src="/static/images/edit.png" alt="View/Edit" title="View/Edit degree"></a></td>
-                        </tr>
-			        {% endfor %}
+			{% for class in classrooms %}
+		            <tr>
+		                <td>{{ class.getName() }}</td>
+		                <td>0</td>
+		                <td>0</td>
+		                <td>
+		                    <a href="/admin/classes/edit/{{ class.getId() }}"><img class="table-img" src="/static/images/edit.png" alt="View/Edit" title="View/Edit class"></a></td>
+		            </tr>
+			{% endfor %}    
+                    
                 </tbody>
             </table> 
-            <a class="under-table-a" href="/admin/degrees/admin_create_degree">
-                <img class="under-table-img" src="/static/images/add.png" alt="Add new degree" title="Add new degree">
+            <a class="under-table-a" href="/admin/classes/create_class">
+                <img class="under-table-img" src="/static/images/add.png" alt="Add new class" title="Add new class">
             </a>
         </div>
     </section>

@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<script src="static/templates/admin/validation.js"></script>
     <nav class="navbar">
         <div class="navbar-store">
         <img class="navbar-logo" src="/static/images/logo.png" alt="Logo Codecool">
@@ -22,13 +23,13 @@
         <form method="post" class="flexbox-container">
                 <img src="/static/images/avatar.png" class="avatar">
                 <div>
-                    <input class="loginbox" type="text" name="login" placeholder=" Username" id="loginInput" value="">
+                    <input class="loginbox" type="text" name="login" placeholder=" Username" id="loginInput" value="" onchange="validateLogin()">
                 </div>
                 <div>
-                    <input class="loginbox" type="password" name="password" placeholder=" Password" id="passwordInput" value="">
+                    <input class="loginbox" type="password" name="password" placeholder=" Password" id="passwordInput" value="" onchange="validateLogin()">
                 </div>
                 <div>
-                    <input class="submitbutton" type="submit" value="Log in" onclick="validateLogin()">
+                    <input class="submitbutton" type="submit" value="Log in" id="loginButton">
                 </div>
         </form>
     </div>
