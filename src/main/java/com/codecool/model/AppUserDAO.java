@@ -37,7 +37,14 @@ public class AppUserDAO extends CommonDAO {
     public AppUser get(String login) {
         String sqlString = "SELECT * FROM appuser WHERE login = ?;";
         
-        Map<String, String> result = executeSQLSelect(connection, sqlString, login).get(0);
+        List<Map<String, String>> resultList = executeSQLSelect(connection, sqlString, login);
+        Map<String, String> result;
+
+        if (resultList.size() > 0) {
+            result = resultList.get(0);
+        } else {
+            return null;
+        }
 
         //AppUser(String login, String password, String firstName, String lastName, String email, String appuserType)
         return new AppUser(result.get("login"), 
