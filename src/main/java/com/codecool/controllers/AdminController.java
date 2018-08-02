@@ -17,6 +17,9 @@ import java.util.Map;
 
 public class AdminController implements HttpHandler {
 
+    //nie dziala update mentora
+    // nie dziala validacja
+
     private FactoryDAO factoryDAO = new FactoryDAO();
 
     private List<Mentor> mentors= new ArrayList<>();
