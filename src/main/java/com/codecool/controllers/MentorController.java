@@ -87,8 +87,11 @@ public class MentorController implements HttpHandler {
     }
 
     private void editProfile(HttpExchange httpExchange) {
-
-
+        Map<String, String> data = Common.getDataFromRequest(httpExchange);
+        mentor.setPassword(data.get("password"));
+        mentor.setEmail(data.get("email"));
+        factoryDAO.getMentorDAO().update(mentor);
+        Common.redirect(httpExchange, "/mentor/profile");
     }
 
     private String chooseTwigFileByUri(String[] uriData) {
