@@ -1,12 +1,9 @@
 package com.codecool.controllers;
 
-import com.codecool.model.Codecooler;
-import com.codecool.model.FactoryDAO;
-import com.codecool.model.Mentor;
+import com.codecool.model.*;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -34,12 +31,14 @@ public class MentorController implements HttpHandler {
     }
 
     private String chooseTwigFileByUri(String[] uriData) {
-        final String LOGIN = "/static/templates/login_page.twig";
-        final String PROFILE = "/static/templates/mentor_profile.twig";
-        final String CODECOOLERS = "/static/templates/mentor_codecoolers.twig";
-        final String CODECOOLER = "/static/templates/mentor_one_codecooler.twig";
-        final String ARTIFACTS = "/static/templates/mentor_one_codecooler_artifacts.twig";
-        final String QUESTS = "/static/templates/mentor_quests.twig";
+        final String LOGIN = "/static/templates/mentor/login_page.twig";
+        final String PROFILE = "/static/templates/mentor/mentor_profile.twig";
+        final String CODECOOLERS = "/static/templates/mentor/mentor_codecoolers.twig";
+        final String CODECOOLER = "/static/templates/mentor/mentor_one_codecooler.twig";
+        final String ARTIFACTS = "/static/templates/mentor/mentor_artifacts.twig";
+        final String ARTIFACT = "/static/templates/mentor/mentor_one_artifact.twig";
+        final String QUESTS = "/static/templates/mentor/mentor_quests.twig";
+        final String QUEST = "/static/templates/mentor/mentor_one_quest.twig";
 
         if (uriData.length == 1) {
             return PROFILE;

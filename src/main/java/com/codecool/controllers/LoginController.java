@@ -34,7 +34,7 @@ public class LoginController implements HttpHandler {
     }
 
     private String createResponse() {
-        String classpath = "static/templates/login_page.twig";
+        String classpath = "static/templates/mentor/login_page.twig";
         JtwigModel jtwigModel = JtwigModel.newModel();
         JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(classpath);
         return jtwigTemplate.render(jtwigModel);
