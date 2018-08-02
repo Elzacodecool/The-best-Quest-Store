@@ -77,14 +77,14 @@ BEGIN;
 INSERT INTO codecooler_artifact
 (codecooler_id, artifact_id, purchase_date, use_date)
 VALUES
-(1, 1, 100, 100),
-(1, 3, 100, 100);
+(1, 1, 1528979803000, 1533213309872),
+(1, 3, 1529757403000, 1532349403000);
 
 INSERT INTO codecooler_artifact
 (codecooler_id, artifact_id, purchase_date)
 VALUES
-(1, 2, 100),
-(1, 3, 100);
+(1, 2, 1531571803000),
+(1, 3, 1533213309872);
 
 INSERT INTO quest
 (quest_name, quest_description, prize, category)
@@ -103,9 +103,9 @@ BEGIN;
 INSERT INTO codecooler_quest
 (codecooler_id, quest_id, mark_date)
 VALUES
-(1, 2, 100),
-(3, 1, 100),
-(3, 2, 100);
+(1, 2, 1530535003000),
+(3, 1, 1531571803000),
+(3, 2, 1533213309872);
 
 INSERT INTO codecooler_quest
 (codecooler_id, quest_id)
