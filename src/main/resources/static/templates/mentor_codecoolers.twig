@@ -61,17 +61,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for student in students %}
+                    {% for codecooler in codecoolers %}
                     <tr>
-                        <td>{{ student.getLogin() }}</td>
-                        <td>{{ student.getFirstName() }}</td>
-                        <td>{{ student.getLastName() }}</td>
-                        <td>{{ student.getEmail() }}</td>
-                        <td>{{ student.getClassroom() }}</td>
-                        <td>{{ student.getWallet() }}</td>
+                        <td>{{ codecooler.getLogin() }}</td>
+                        <td>{{ codecooler.getFirstName() }}</td>
+                        <td>{{ codecooler.getLastName() }}</td>
+                        <td>{{ codecooler.getEmail() }}</td>
+                        <td>{{ codecooler.getClassroom() }}</td>
+                        <td>{{ codecooler.getWallet() }}</td>
                         <td>
-                            <a href={{ 'mentor/students/edit/' student.getId() }}>
-                            <img class="table-img" src="images/edit.png" alt="View/Edit" title="View/Edit codecooler">
+                            <a href={{ '/mentor/codecoolers/edit/' ~ codecooler.getId() }}>
+                            <img class="table-img" src="/static/images/edit.png" alt="View/Edit" title="View/Edit codecooler">
                             </a>
 
                         </td>
@@ -80,8 +80,8 @@
 
                 </tbody>
             </table>
-            <a class="under-table-a" href="mentor/students/add">
-                <img class="under-table-img" src="images/add.png" alt="Add new codecooler" title="Add new codecooler">
+            <a class="under-table-a" href="/mentor/codecoolers/add">
+                <img class="under-table-img" src="/static/images/add.png" alt="Add new codecooler" title="Add new codecooler">
             </a>
 
         </div>

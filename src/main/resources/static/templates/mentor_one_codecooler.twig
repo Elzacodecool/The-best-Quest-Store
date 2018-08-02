@@ -51,29 +51,29 @@
             <img src="/static/images/codecooler.png" class="avatar">
             <form action="post">
                 <div id="topcontent">
-                    <h2>{{ student.getFirstName() ~ ' ' ~ student.getLastName() ~ '(' student.getLogin() ~ ')' }}</h2>
+                    <h2>{{  codecooler.getFirstName() ~ ' ' ~ codecooler.getLastName() ~ '(' ~ codecooler.getLogin() ~ ')' }}</h2>
                     <p class="nameinput">Last name:</p>
-                    <input class="profilebox" type="text" name="last_name" value="{{ student.getNastName() }}">
+                    <input class="profilebox" name="last_name" value={{ codecooler.getLastName() }}>
                 </div>
                 <div>
                     <p class="nameinput"> Password:</p>
-                    <input class="profilebox" type="password" name="password" value="{{ student.getPassword() }}">
+                    <input class="profilebox" type="password" name="password" value={{ codecooler.getPassword() }}>
                 </div>
                 <div>
                     <p class="nameinput">Email:</p>
-                    <input class="profilebox" type="text" name="email" value="{{ student.getEmail() }}">
+                    <input class="profilebox" name="email" value={{ codecooler.getEmail() }}>
                 </div>
                 <div>
                     <p class="nameinput">Classroom:</p>
-                    <input class="profilebox" type="text" name="classroom" value="{{ student.getClassroom() }}">
+                    <input class="profilebox" name="classroom" value={{ codecooler.getClassroom() }}>
                 </div>
                 <div>
                     <p class="nameinput">Wallet:</p>
-                    <input class="profilebox" type="text" name="wallet" value="{{ student.getWallet() }}" disabled="disabled">
+                    <input class="profilebox" name="wallet" value={{ codecooler.getWallet() }}>
                 </div>
                 <div>
                     <p class="nameinput">Total earned coolcoins:</p>
-                    <input class="profilebox" type="text" name="earned_coolcoins" value="{{ student.getEarnedCoolcoins() }}" disabled="disabled">
+                    <input class="profilebox" name="earned_coolcoins" value={{  codecooler.getEarnedCoolcoins() }}>
                 </div>
                 <div>
                     <input class="submitbutton" type="submit" value="Save changes">
@@ -81,10 +81,10 @@
             </form>
         </div>
         <div class="under-form-div">
-            <a class="under-table-a" href="{{ 'mentor/codecoolers/quests/' ~ student.getId() }}">
-                <img class="under-table-img round-img" src="images/quest.png" alt="Codecooler quests" title="Codecooler quests"></a>
-            <a class="under-table-a" href="{{ 'mentor/codecoolers/artifacts/' ~ student.getId() }}">
-                <img class="under-table-img round-img" src="images/artifact.png" alt="Codecooler artifacts" title="Codecooler artifacts"></a>
+            <a class="under-table-a" href="{{ '/mentor/codecoolers/quests/' ~ codecooler.getId() }}">
+                <img class="under-table-img round-img" src="/static/images/quest.png" alt="Codecooler quests" title="Codecooler quests"></a>
+            <a class="under-table-a" href="{{ '/mentor/codecoolers/artifacts/' ~ codecooler.getId() }}">
+                <img class="under-table-img round-img" src="/static/images/artifact.png" alt="Codecooler artifacts" title="Codecooler artifacts"></a>
         </div>
     </div>
 
