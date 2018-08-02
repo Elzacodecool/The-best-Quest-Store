@@ -95,7 +95,7 @@ public class MentorController implements HttpHandler {
     }
 
     private String chooseTwigFileByUri(String[] uriData) {
-        final String LOGIN = "/static/templates/mentor/login_page.twig";
+        final String LOGIN = "/static/templates/login_page.twig";
         final String PROFILE = "/static/templates/mentor/mentor_profile.twig";
         final String CODECOOLERS = "/static/templates/mentor/mentor_codecoolers.twig";
         final String CODECOOLER = "/static/templates/mentor/mentor_one_codecooler.twig";
