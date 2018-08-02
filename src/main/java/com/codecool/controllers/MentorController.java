@@ -113,6 +113,15 @@ public class MentorController implements HttpHandler {
     }
 
     private void addArtifact(Map<String, String> data) {
+        ArtifactDAO artifactDAO = factoryDAO.getArtifactDAO();
+        String name = data.get("artifact_name");
+        String description = data.get("artifact_description");
+        int cost = Integer.valueOf(data.get("cost"));
+        String category = data.get("category");
+
+        Artifact artifact = new Artifact(name, description, cost, category);
+
+        artifactDAO.add(artifact);
 
     }
 
@@ -181,6 +190,16 @@ public class MentorController implements HttpHandler {
             }
         }
 
+        if (isEdit(uriData)) {
+            switch (title) {
+                case "codecoolers":
+                    return CODECOOLER;
+                case "quests":
+                    return QUEST;
+                case "artifacts":
+                    return ARTIFACT;
+            }
+        }
         return LOGIN;
     }
 
