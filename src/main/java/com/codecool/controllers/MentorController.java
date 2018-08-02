@@ -8,8 +8,8 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 
 public class MentorController implements HttpHandler {
     private Mentor mentor;
@@ -60,6 +60,30 @@ public class MentorController implements HttpHandler {
                     editArtifact(httpExchange);
             }
         }
+    }
+
+    private void editArtifact(HttpExchange httpExchange) {
+
+    }
+
+    private void editQuest(HttpExchange httpExchange) {
+
+    }
+
+    private void editCodecooler(HttpExchange httpExchange) {
+
+    }
+
+    private void addArtifact(HttpExchange httpExchange) {
+
+    }
+
+    private void addQuest(HttpExchange httpExchange) {
+
+    }
+
+    private void addCodecooler(HttpExchange httpExchange) {
+
     }
 
     private void editProfile(HttpExchange httpExchange) {
