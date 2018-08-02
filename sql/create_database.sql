@@ -51,8 +51,8 @@ CREATE TABLE codecooler_artifact (
     id SERIAL PRIMARY KEY,
     codecooler_id INTEGER REFERENCES codecooler(id),
     artifact_id INTEGER REFERENCES artifact(id),
-    purchase_date TIMESTAMP,
-    use_date TIMESTAMP
+    purchase_date BIGINT,
+    use_date BIGINT
 );
 
 CREATE TABLE quest (
@@ -67,7 +67,7 @@ CREATE TABLE codecooler_quest (
     id SERIAL PRIMARY KEY,
     codecooler_id INTEGER REFERENCES codecooler(id),
     quest_id INTEGER REFERENCES quest(id),
-    mark_date TIMESTAMP
+    mark_date BIGINT
 );
 
 CREATE TABLE team (
