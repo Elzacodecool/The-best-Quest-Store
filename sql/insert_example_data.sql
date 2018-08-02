@@ -42,7 +42,7 @@ VALUES
 ('olka', 3, 2, 1),
 ('przemyslawpolczak', 1, 301, 22);
 
-INSERT INTO Mentor
+INSERT INTO mentor
 (Appuser_login)
 VALUES
 ('marekgrzybek'),
@@ -50,7 +50,7 @@ VALUES
 ('ak'),
 ('kg');
 
-INSERT INTO Mentor_classroom
+INSERT INTO mentor_classroom
 (mentor_id, classroom_id)
 VALUES
 (1, 1),
@@ -61,7 +61,7 @@ VALUES
 (4, 2),
 (4, 3);
 
-INSERT INTO Artifact
+INSERT INTO artifact
 (artifact_name, artifact_description, cost, category)
 VALUES
 ('Day off', 'Free day of codecool', 20, 'solo'),
@@ -74,19 +74,19 @@ VALUES
 COMMIT;
 
 BEGIN;
-INSERT INTO Codecooler_artifact
+INSERT INTO codecooler_artifact
 (codecooler_id, artifact_id, purchase_date, use_date)
 VALUES
 (1, 1, '2018-07-03 08:44:44', '2018-07-04 11:44:44'),
 (1, 3, '2018-07-22 09:00:00', '2018-07-27 15:00:00');
 
-INSERT INTO Codecooler_artifact
+INSERT INTO codecooler_artifact
 (codecooler_id, artifact_id, purchase_date)
 VALUES
 (1, 2, '2018-06-03 13:33:00'),
 (1, 3, '2018-07-28 09:00:00');
 
-INSERT INTO Quest
+INSERT INTO quest
 (quest_name, quest_description, prize, category)
 VALUES
 ('Complete SI', 'Complete your TW in time', 1, 'Basic'),
@@ -99,24 +99,40 @@ COMMIT;
 
 
 BEGIN;
-INSERT INTO Codecooler_quest
+
+INSERT INTO codecooler_quest
+(codecooler_id, quest_id, mark_date)
+VALUES
+(1, 2, '2018-07-22 09:00:00'),
+(3, 1, '2018-06-11 14:00:00'),
+(3, 2, '2018-07-07 11:00:00');
+
+INSERT INTO codecooler_quest
 (codecooler_id, quest_id)
 VALUES
 (1, 1),
 (1, 3),
 (2, 2);
 
-INSERT INTO Team
-(artefact_id, leader_id)
+INSERT INTO team
+(team_name, artifact_id, leader_id)
 VALUES
-(1, 1);
+('coolersi', 3, 2),
+('new_ones', 3, 4),
+('coolersi', 4, 1),
+('advanced', 5, 2);
 COMMIT;
 
 
 BEGIN;
-INSERT INTO Codecooler_team
+INSERT INTO codecooler_team
 (codecooler_id, team_id, coolcoins)
 VALUES
-(1,1, 100);
+(2, 1, 2),
+(4, 2, 3),
+(1, 3, 5),
+(2, 4, 1),
+(4, 1, 4),
+(5, 1, 2);
 
 COMMIT;

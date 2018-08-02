@@ -8,7 +8,7 @@ import java.util.Map;
 /* columns in DB:
         id
         degree_name
-        min_coolcoins
+        min_earned_coolcoins
 */
 public class DegreeDAO extends CommonDAO {
 
