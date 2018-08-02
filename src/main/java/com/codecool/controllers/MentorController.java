@@ -32,6 +32,7 @@ public class MentorController implements HttpHandler {
 
     private void updateData(HttpExchange httpExchange) {
         String [] uriData = getUriData(httpExchange);
+        Map<String, String> data = Common.getDataFromRequest(httpExchange);
 
         if (isHomePage(uriData) || isMenu(uriData)) {
             editProfile(httpExchange);
@@ -51,9 +52,10 @@ public class MentorController implements HttpHandler {
             }
         }
         else if (isEdit(uriData)) {
+            int id = getId(uriData);
             switch (title) {
                 case "codecoolers":
-                    editCodecooler(httpExchange);
+                    editCodecooler(id, data);
                 case "quests":
                     editQuest(httpExchange);
                 case "artifacts":
@@ -70,8 +72,19 @@ public class MentorController implements HttpHandler {
 
     }
 
-    private void editCodecooler(HttpExchange httpExchange) {
+    private void editCodecooler(int id, Map<String, String> data) {
+        CodecoolerDAO codecoolerDAO = factoryDAO.getCodecoolerDAO();
+        Codecooler codecooler = codecoolerDAO.get(id);
+        String lastName = data.get("last_name");
+        String password = data.get("password");
+        String email = data.get("email");
+        String classroom = data.get("classroom");
 
+        codecooler.setLastName(lastName);
+        codecooler.setPassword(password);
+        codecooler.setEmail(email);
+
+        codecoolerDAO.update(codecooler);
     }
 
     private void addArtifact(HttpExchange httpExchange) {
@@ -91,7 +104,6 @@ public class MentorController implements HttpHandler {
         mentor.setPassword(data.get("password"));
         mentor.setEmail(data.get("email"));
         factoryDAO.getMentorDAO().update(mentor);
-        Common.redirect(httpExchange, "/mentor/profile");
     }
 
     private String chooseTwigFileByUri(String[] uriData) {
