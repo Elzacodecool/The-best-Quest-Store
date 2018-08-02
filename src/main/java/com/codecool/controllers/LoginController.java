@@ -22,10 +22,7 @@ public class LoginController implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String method = httpExchange.getRequestMethod();
-        String classpath = "static/templates/login_page.twig";
-        JtwigModel jtwigModel = JtwigModel.newModel();
-        JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(classpath);
-        String response = jtwigTemplate.render(jtwigModel);
+        String response = createResponse();
 
         if (method.equals("POST")) {
             checkLoginAndPassword(httpExchange);
@@ -34,6 +31,13 @@ public class LoginController implements HttpHandler {
         OutputStream os = httpExchange.getResponseBody();
         os.write(response.getBytes());
         os.close();
+    }
+
+    private String createResponse() {
+        String classpath = "static/templates/login_page.twig";
+        JtwigModel jtwigModel = JtwigModel.newModel();
+        JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(classpath);
+        return jtwigTemplate.render(jtwigModel);
     }
 
     private void checkLoginAndPassword(HttpExchange httpExchange) {
