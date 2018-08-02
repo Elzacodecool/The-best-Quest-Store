@@ -1,0 +1,108 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    flex-direction: column;
+}
+
+.flexbox-container{
+    padding: 3px;
+    border-radius: 25px;
+    border: 5px solid #3d2d57;
+    margin: 5px;
+
+    
+    display: flex;
+    width: 350px;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+@media and screen(max-height: 600px){
+    .flexbox-container{
+        height: 800px;
+        width: auto;
+    }
+}
+
+.flexbox-container div{
+    padding: 5px;
+    display: 
+}
+
+h2{
+    font-family: paprika;
+    text-align: center;
+}
+
+.list_information{
+    font-family: paprika;
+    color: aliceblue;
+}
+
+#topcontent{
+    margin-top: -30px;
+}
+
+.nameinput{
+    margin-bottom: -5px;
+    margin-left: 10px;
+    font-family: paprika;
+    margin-top: -5px;
+
+}
+
+.profilebox{
+    padding: 5px;
+    width: 300px;
+    height: 25px;
+    border-radius: 10px;
+    margin: 10px;
+    border: solid white;
+}
+
+.loginbox{
+    padding: 5px;
+    width: 300px;
+    height: 25px;
+    border-radius: 10px;
+    margin: 10px;
+    border: solid white;
+}
+
+.submitbutton{
+    margin: 10px;
+    width: auto;
+    height: 35px;
+    background-color: white;
+    border: white;
+    color: gray;
+    text-align: center;
+    border-radius: 10px
+}
+
+.submitbutton:hover{
+    cursor: pointer;
+    background-color: white; 
+    color: #3d2d57;
+    border: 2px solid #3d2d57;
+    border-radius: 10px
+}
+
+.avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-top: -50px;
+    margin-left: -350px;
+}
+
+#quest_button{
+    font-size: 20px;
+}
+
+#artifact_button{
+    font-size: 20px;
+}

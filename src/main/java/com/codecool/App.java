@@ -13,7 +13,7 @@ public class App {
         HttpServer server = HttpServer.create(new InetSocketAddress(9000), 0);
 
         server.createContext("/login", new LoginController());
-        server.createContext("/login/admin", new AdminController());
+        server.createContext("/admin", new AdminController());
 
         server.createContext("/mentor", new MentorController());
         server.createContext("/static", new StaticController());

@@ -20,7 +20,6 @@ public class AdminController implements HttpHandler {
 
     // 1. mentor dao i mentors bedzie działało
     // 2. dostac sie do dobrego obiektu admina i profile bedzie działac
-    // 3. degrees chuj wie o co chodzi
     // 4. w classess zliaczac mentorów i cc przypsianych
 
     private FactoryDAO factoryDAO = new FactoryDAO();
@@ -32,6 +31,7 @@ public class AdminController implements HttpHandler {
 
 
     private String response = "";
+    private String mainSubpage;
     private String[] uri;
     private JtwigModel model;
 
@@ -57,7 +57,7 @@ public class AdminController implements HttpHandler {
     }
 
     private String constructResponse(HttpExchange httpExchange){
-        String mainSubpage = uri[3];
+        mainSubpage = uri[2];
         model = JtwigModel.newModel();
 
         // /login/admin/mentors/edit/1
@@ -82,32 +82,29 @@ public class AdminController implements HttpHandler {
     private void displayMentorsSubpage(String[] uri) {
         loadMentorsListFromDAO();
         response = getResponse("admin_mentors.twig", getMentorsModel());
-        if(uri.length==5 && uri[4].equals("admin_create_mentor")){
+        if(uri.length==4 && uri[3].equals("admin_create_mentor")){
             response = getResponse("admin_create_mentor.twig");
         }
-        else if(uri.length==6){
-            response = getResponse("admin_one_mentor.twig", getMentorById(Integer.parseInt(uri[5])));
+        else if(uri.length==5){
+            response = getResponse("admin_one_mentor.twig", getMentorById(Integer.parseInt(uri[4])));
         }
-        else if(uri.length==7){
-            response = getResponse("admin_one_mentor_codecoolers.twig", getMentorById(Integer.parseInt(uri[5]))); // Z TEGO MENTORA TRZEBA JESZCZE WYCIAGNAC LISTE CODECOOLERSÓW
+        else if(uri.length==6){
+            response = getResponse("admin_one_mentor_codecoolers.twig", getMentorById(Integer.parseInt(uri[4]))); // Z TEGO MENTORA TRZEBA JESZCZE WYCIAGNAC LISTE CODECOOLERSÓW
         }
     }
 
     private void displayDegreesSubpage(String[] uri) {
-        System.out.println("weszło w degrees");
-        for(int i = 0; i<uri.length; i++){
-            System.out.println(i+1+". "+ uri[i]);
-        }
         loadDegreesListFromDAO();
-
         response = getResponse("admin_degrees.twig", getDegreesModel());
-        if(uri.length==5){
+        if(uri.length==4 ){
+            System.out.println(uri.length);
             System.out.println("weszlo w create degree");
             response = getResponse("admin_create_degree.twig");
         }
-        else if(uri.length==6){
+        else if(uri.length==5){
+            System.out.println(uri.length);
             System.out.println("weszlo w one degree");
-            response = getResponse("admin_one_degree.twig", getDegreeById(1));
+            response = getResponse("admin_one_degree.twig", getDegreeById(Integer.parseInt(uri[4])));
             //Integer.parseInt(uri[5])
         }
     }
@@ -115,11 +112,11 @@ public class AdminController implements HttpHandler {
     private void displayClassesSubpage(String[] uri) {
         loadClassesListFromDAO();
         response = getResponse("admin_classes.twig", getClassesModel());
-        if(uri.length==5){
+        if(uri.length==4){
             response = getResponse("admin_create_class.twig");
         }
-        else if(uri.length==6){
-            response = getResponse("admin_one_class.twig", getClassById(Integer.parseInt(uri[5])));
+        else if(uri.length==5){
+            response = getResponse("admin_one_class.twig", getClassById(Integer.parseInt(uri[4])));
         }
     }
 
@@ -131,7 +128,7 @@ public class AdminController implements HttpHandler {
         String formData = br.readLine();
         Map inputs = parseFormData(formData);
 
-        String mainSubpage = uri[3];
+        mainSubpage = uri[2];
 
         if (mainSubpage.equals("profile")) {
             manageProfileSubpage(uri, inputs);
@@ -140,7 +137,6 @@ public class AdminController implements HttpHandler {
             manageMentorsSubpage(uri, inputs);
         }
         else if (mainSubpage.equals("classes")) {
-            System.out.println("w poscie w classes");
             manageClassesSubpage(uri, inputs);
         }
         else if (mainSubpage.equals("degrees")) {
@@ -155,11 +151,11 @@ public class AdminController implements HttpHandler {
 
     private void manageMentorsSubpage(String[]uri, Map inputs){
         MentorDAO mentorDAO = factoryDAO.getMentorDAO();
-        if(uri.length==5 && uri[4].equals("admin_create_mentor")){
+        if(uri.length==4 && uri[3].equals("admin_create_mentor")){
             createMentor(inputs, mentorDAO);
         }
-        else if(uri.length==6){
-            //Mentor mentor = mentorDAO.get(Integer.parseInt(uri[5]));
+        else if(uri.length==5){
+            //Mentor mentor = mentorDAO.get(Integer.parseInt(uri[4]));
             //editMentorProfile(mentor,inputs, mentorDAO);
         }
         loadMentorsListFromDAO();
@@ -168,11 +164,13 @@ public class AdminController implements HttpHandler {
 
     private void manageDegreesSubpage(String[] uri, Map inputs){
         DegreeDAO degreeDAO = factoryDAO.getDegreeDAO();
-        if(uri.length==5){
+        if(uri.length==4){
             createDegree(inputs, degreeDAO);
         }
-        else if(uri.length==6){
-            Degree degree = degreeDAO.get(Integer.parseInt(uri[5]));
+        else if(uri.length==5){
+            Degree degree = degreeDAO.get(Integer.parseInt(uri[4]));
+            System.out.println(degree.getName());
+            System.out.println(degree.getId());
             editDegree(degree, inputs, degreeDAO);
         }
         loadDegreesListFromDAO();
@@ -181,11 +179,11 @@ public class AdminController implements HttpHandler {
 
     private void manageClassesSubpage(String[] uri, Map inputs){
         ClassroomDAO classroomDAO = factoryDAO.getClassroomDAO();
-        if(uri.length==5){
+        if(uri.length==4){
             createClassroom(inputs, classroomDAO);
         }
-        else if(uri.length==6){
-            Classroom classroom = classroomDAO.get(Integer.parseInt(uri[5]));
+        else if(uri.length==5){
+            Classroom classroom = classroomDAO.get(Integer.parseInt(uri[4]));
             editClassroom(classroom,inputs, classroomDAO);
         }
         loadClassesListFromDAO();
