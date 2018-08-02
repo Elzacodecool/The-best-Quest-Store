@@ -65,7 +65,7 @@
                         <td>{{ quest.getPrize() }}</td>
                         <td>{{ quest.getCategory() }}</td>
                         <td>
-                            <a href={{ '/mentor/quests/' ~ quest.getId() }}>
+                            <a href={{ '/mentor/quests/edit/' ~ quest.getId() }}>
                                 <img class="table-img" src="/static/images/edit.png" alt="View/Edit" title="View/Edit quest">
                             </a>
                         </td>
@@ -73,7 +73,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a class="under-table-a" href="mentor_create_quest.html">
+            <a class="under-table-a" href="/mentor/quests/add">
                 <img class="under-table-img" src="/static/images/add.png" alt="Add new quest" title="Add new quest">
             </a>
 

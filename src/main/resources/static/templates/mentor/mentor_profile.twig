@@ -50,13 +50,13 @@
         <img src="/static/images/mentor.png" class="avatar">
         <form action="post">
             <div id="topcontent">
-                <h2>{{ mentor.getFirstName() }} {{ mentor.getLastName() }}</h2>
+                <h2>{{ mentor.getFirstName() ~ ' ' ~ mentor.getLastName() }}</h2>
                 <p class="nameinput"> Password:</p>
-                <input class="profilebox" type="password" name="password" value={{ mentor.getPassword }}>
+                <input class="profilebox" type="password" name="password" value="{{ mentor.getPassword }}">
             </div>
             <div>
                 <p class="nameinput">Email:</p>
-                <input class="profilebox" type="text" name="email" value={{ mentor.getEmail() }}>
+                <input class="profilebox" type="text" name="email" value="{{ mentor.getEmail() }}">
             </div>
             <div>
                 <input class="submitbutton" type="submit" value="Save changes">
