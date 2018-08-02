@@ -77,19 +77,19 @@ BEGIN;
 INSERT INTO codecooler_artifact
 (codecooler_id, artifact_id, purchase_date, use_date)
 VALUES
-(1, 1, '2018-07-03 08:44:44', '2018-07-04 11:44:44'),
-(1, 3, '2018-07-22 09:00:00', '2018-07-27 15:00:00');
+(1, 1, 1528979803000, 1533213309872),
+(1, 3, 1529757403000, 1532349403000);
 
 INSERT INTO codecooler_artifact
 (codecooler_id, artifact_id, purchase_date)
 VALUES
-(1, 2, '2018-06-03 13:33:00'),
-(1, 3, '2018-07-28 09:00:00');
+(1, 2, 1531571803000),
+(1, 3, 1533213309872);
 
 INSERT INTO quest
 (quest_name, quest_description, prize, category)
 VALUES
-('Complete SI', 'Complete your TW in time', 1, 'Basic'),
+('Complete TW', 'Complete your TW in time', 1, 'Basic'),
 ('Complete SI', 'Complete your SI in time', 1, 'Basic'),
 ('Workshop', 'Help to ornanize workshop for fellow students', 10, 'Extra'),
 ('Demo', 'Presentation on demo day', 10, 'Extra'),
@@ -103,9 +103,9 @@ BEGIN;
 INSERT INTO codecooler_quest
 (codecooler_id, quest_id, mark_date)
 VALUES
-(1, 2, '2018-07-22 09:00:00'),
-(3, 1, '2018-06-11 14:00:00'),
-(3, 2, '2018-07-07 11:00:00');
+(1, 2, 1530535003000),
+(3, 1, 1531571803000),
+(3, 2, 1533213309872);
 
 INSERT INTO codecooler_quest
 (codecooler_id, quest_id)

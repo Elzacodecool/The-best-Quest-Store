@@ -42,9 +42,9 @@ public class DegreeDAO extends CommonDAO {
     }
 
     public List<Degree> getList() {
-        String sql = String.format("SELECT * FROM degree");
+        String sqlString = "SELECT * FROM degree";
 
-        List<Map<String, String>> results = executeSQLSelect(connection, sql);
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Degree> degrees = new ArrayList<Degree>();
 
         //Degree(Integer id, String name, Integer minEarnedCoolcoins)

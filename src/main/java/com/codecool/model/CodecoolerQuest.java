@@ -8,8 +8,16 @@ public class CodecoolerQuest {
     private Quest quest;
     private Date markDate;
 
-    public CodecoolerQuest(Quest quest) {
+    public CodecoolerQuest(Quest quest, Date markDate) {
         this.quest = quest;
+        this.markDate = markDate;
+    }
+
+    // data from DB
+    public CodecoolerQuest(Integer id, Quest quest, Date markDate) {
+        this.id = id;
+        this.quest = quest;
+        this.markDate = markDate;
     }
 
     public int getId() {
@@ -30,6 +38,6 @@ public class CodecoolerQuest {
 
     public String toString() {
         return String.format("[CodecoolerQuest] id: %d, quest name: %s, markDate: %s", 
-                            this.id, this.quest.getName(), this.markDate.toString());
+                            this.id, this.quest.getName(), this.markDate);
     }
 }

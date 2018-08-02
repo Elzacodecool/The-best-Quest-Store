@@ -48,9 +48,9 @@ public class ClassroomDAO extends CommonDAO {
     }
 
     public List<Classroom> getList() {
-        String sql = String.format("SELECT * FROM classroom");
+        String sqlString = "SELECT * FROM classroom";
 
-        List<Map<String, String>> results = executeSQLSelect(connection, sql);
+        List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Classroom> classrooms = new ArrayList<Classroom>();
 
         //Classroom(Integer id, String name)
@@ -61,8 +61,17 @@ public class ClassroomDAO extends CommonDAO {
     }
 
     public int countAssignedMentors(Integer id) {
-//TO DO ??
-        return 1;
+        String sqlString = "SELECT COUNT(mentor_id) FROM mentor_classroom WHERE classroom_id = ?";
+        Map<String, String> result = executeSQLSelect(connection, sqlString, id).get(0);
+
+        return Integer.valueOf(result.get("count"));
+    }
+
+    public int countAssignedCodecoolers(Integer id) {
+        String sqlString = "SELECT COUNT(id) FROM codecooler WHERE classroom_id = ?";
+        Map<String, String> result = executeSQLSelect(connection, sqlString, id).get(0);
+
+        return Integer.valueOf(result.get("count"));
     }
 }
 
