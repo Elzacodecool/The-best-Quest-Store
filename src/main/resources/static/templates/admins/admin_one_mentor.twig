@@ -12,6 +12,8 @@
 </head>
 
 <body>
+    <script src="/validation.js"></script>
+
     <nav class="navbar">
         <div class="navbar-store">
         <img class="navbar-logo" src="/static/images/logo.png" alt="Logo Codecool">
@@ -63,12 +65,9 @@
                 <input class="profilebox" type="text" name="email" value="{{ mentor.getEmail() }}">
             </div>
             <div>
-                <p class="nameinput">Class 1:</p>
-                <input class="profilebox" type="text" name="class1" value="2017.3 Krk">
-            </div>
-            <div>
-                <p class="nameinput">Class 2:</p>
-                <input class="profilebox" type="text" name="class2" value="">
+                <p class="nameinput">Classes </p>
+                <input class="profilebox" type="text" name="class" value=
+                        {% for class in mentor.getClassroomList() %} {{class.getName() }} {% endfor %}>
             </div>
             <div>
                 <input class="submitbutton" type="submit" value="Save changes">

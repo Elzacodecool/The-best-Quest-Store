@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>Quest Store</title>
-    <link rel="stylesheet" href="/static/css/adamstandard.css">
-    <link rel="stylesheet" href="/static/css/navbar.css">
     <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/content.css">
     <link rel="stylesheet" href="/static/css/page-footer.css">
     <link href="https://fonts.googleapis.com/css?family=Merienda:700|Paprika" rel="stylesheet"> 
 </head>
@@ -44,24 +44,37 @@
         </li>
         </ul>
     </nav>
-<div class="main">    
-    <div class="flexbox-container">
-        <form method="POST">
-            <div>
-                <h2>{{ classroom.getName() }}</h2>
-                <p class="nameinput">Name:</p>
-                <input class="profilebox" type="text" name="className" value="{{ classroom.getName() }}">
-            </div>
-            <div>
-                <input class="submitbutton" type="submit" value="Save changes">
-            </div>
-        </form>
-    </div>
-    
-</div> 
+
+    <section class="content-section">
+        <div class="div-content-section">
+            <h1>Degrees</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Minimum coolcoins</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+			        {% for degree in degrees %}
+                        <tr>
+                            <td>{{ degree.getName() }}</td>
+                            <td>{{ degree.getMinEarnedCoolcoins() }}</td>
+                            <td><a href="/admin/degrees/edit/{{ degree.getId() }}"><img class="table-img" src="/static/images/edit.png" alt="View/Edit" title="View/Edit degree"></a></td>
+                        </tr>
+			        {% endfor %}
+                </tbody>
+            </table> 
+            <a class="under-table-a" href="/admin/degrees/create_degree">
+                <img class="under-table-img" src="/static/images/add.png" alt="Add new degree" title="Add new degree">
+            </a>
+        </div>
+    </section>
+
     <footer class="page-footer">
         &#169; Copyright a&#38;a 2018
     </footer>   
+
 </body>
 </html>
-
