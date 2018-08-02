@@ -126,9 +126,15 @@ public class MentorController implements HttpHandler {
     }
 
     private void addQuest(Map<String, String> data) {
+        QuestDAO questDAO = factoryDAO.getQuestDAO();
+        String name = data.get("quest_name");
+        String description = data.get("quest_description");
+        int prize = Integer.valueOf(data.get("prize"));
+        String category = data.get("category");
 
+        Quest quest = new Quest(name, description, prize, category);
 
-
+        questDAO.add(quest);
     }
 
     private void addCodecooler(Map<String, String> data) {
