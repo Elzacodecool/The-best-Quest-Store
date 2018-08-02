@@ -138,15 +138,20 @@ public class MentorController implements HttpHandler {
     }
 
     private void addCodecooler(Map<String, String> data) {
-        String login = data.get("login");
-        String password = data.get("password");
         String firstName = data.get("first_name");
         String lastName = data.get("last_name");
+        String login = data.get("login");
+        String password = data.get("password");
         String email = data.get("email");
-        String appuserType = data.get("appuser_type");
-        Codecooler codecooler = new Codecooler(login, password, firstName, lastName, email, appuserType);
+        String classroomName = data.get("classroom");
+        Codecooler codecooler = new Codecooler(login, password, firstName, lastName, email);
 
-        factoryDAO.getCodecoolerDAO();
+        Classroom classroom = factoryDAO.getClassroomDAO().get(classroomName);
+        codecooler.setClassroom(classroom);
+        codecooler.setEarnedCoolcoins(0);
+        codecooler.setWallet(0);
+
+        factoryDAO.getCodecoolerDAO().add(codecooler);
     }
 
     private void editProfile(Map<String, String> data) {
@@ -160,6 +165,7 @@ public class MentorController implements HttpHandler {
         final String PROFILE = "/static/templates/mentor/mentor_profile.twig";
         final String CODECOOLERS = "/static/templates/mentor/mentor_codecoolers.twig";
         final String CODECOOLER = "/static/templates/mentor/mentor_one_codecooler.twig";
+        final String CODECOOLER_ADD = "/static/templates/mentor/mentor_create_codecooler.twig";
         final String ARTIFACTS = "/static/templates/mentor/mentor_artifacts.twig";
         final String ARTIFACT = "/static/templates/mentor/mentor_one_artifact.twig";
         final String QUESTS = "/static/templates/mentor/mentor_quests.twig";
@@ -185,10 +191,10 @@ public class MentorController implements HttpHandler {
             }
         }
 
-        if (isAdd(uriData) || isEdit(uriData)) {
+        if (isAdd(uriData)) {
             switch (title) {
                 case "codecoolers":
-                    return CODECOOLER;
+                    return CODECOOLER_ADD;
                 case "quests":
                     return QUEST;
                 case "artifacts":
