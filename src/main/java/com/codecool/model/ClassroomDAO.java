@@ -35,7 +35,11 @@ public class ClassroomDAO extends CommonDAO {
         Map<String, String> result = executeSQLSelect(connection, sqlString, id).get(0);
 
         //Classroom(Integer id, String name)
-        return new Classroom(Integer.valueOf(result.get("id")), result.get("classroom_name"));
+        Classroom classroom = new Classroom(Integer.valueOf(result.get("id")), result.get("classroom_name"));
+        classroom.setAmountOfCodecoolers(countAssignedCodecoolers(id));
+        classroom.setAmountOfMentors(countAssignedMentors(id));
+
+        return classroom;
     }
 
     public List<Classroom> getList() {
@@ -43,10 +47,16 @@ public class ClassroomDAO extends CommonDAO {
 
         List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Classroom> classrooms = new ArrayList<Classroom>();
+        Classroom classroom;
 
         //Classroom(Integer id, String name)
         for (Map<String, String> result : results) {
-            classrooms.add(new Classroom(Integer.valueOf(result.get("id")), result.get("classroom_name")));
+
+            classroom = new Classroom(Integer.valueOf(result.get("id")), result.get("classroom_name"));
+            classroom.setAmountOfCodecoolers(countAssignedCodecoolers(Integer.valueOf(result.get("id"))));
+            classroom.setAmountOfMentors(countAssignedMentors(Integer.valueOf(result.get("id"))));
+
+            classrooms.add(classroom);
         }
         return classrooms;
     }

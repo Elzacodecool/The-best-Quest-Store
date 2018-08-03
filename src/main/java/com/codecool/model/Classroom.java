@@ -8,6 +8,9 @@ public class Classroom {
     private Integer id;
     private String name;
 
+    private Integer amountOfMentors;
+    private Integer amountOfCodecoolers;
+
     public Classroom(String name) {
         this.name = name;
     }
@@ -30,8 +33,25 @@ public class Classroom {
         this.name = name;
     }
 
+    public Integer getAmountOfMentors() {
+        return this.amountOfMentors;
+    }
+
+    public void setAmountOfMentors(Integer amountOfMentors) {
+        this.amountOfMentors = amountOfMentors;
+    }
+
+    public Integer getAmountOfCodecoolers() {
+        return this.amountOfCodecoolers;
+    }
+
+    public void setAmountOfCodecoolers(Integer amountOfCodecoolers) {
+        this.amountOfCodecoolers = amountOfCodecoolers;
+    }
+
     public String toString() {
-        return String.format("[Classroom] id: %d, name: %s", this.id, this.name);
+        return String.format("[Classroom] id: %d, name: %s, amountOfMentors: %d, amountOfCodecoolers: %d",
+                                this.id, this.name, this.amountOfMentors, this.amountOfCodecoolers);
     }
 
     // for sql query to insert classroom to DB
