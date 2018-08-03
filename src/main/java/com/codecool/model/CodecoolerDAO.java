@@ -150,7 +150,7 @@ public class CodecoolerDAO extends CommonDAO {
     }
 
     public List<Codecooler> getList() {
-        String sqlString = String.format("SELECT * FROM codecooler");
+        String sqlString = "SELECT * FROM codecooler";
 
         List<Map<String, String>> results = executeSQLSelect(connection, sqlString);
         List<Codecooler> codecoolers = new ArrayList<Codecooler>();
