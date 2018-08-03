@@ -6,12 +6,12 @@ import java.sql.SQLException;
 
 public class FactoryDAO {
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/";
-    private static final String DB_NAME = "queststore";
+    private static final String DB_NAME = "qq";
     private static final String userName = "adam";
     private static final String password = "adam12";
 
 
-    private Connection createConnection() {
+    public Connection createConnection() {
         Connection c = null;
         try {
             Class.forName("org.postgresql.Driver");
