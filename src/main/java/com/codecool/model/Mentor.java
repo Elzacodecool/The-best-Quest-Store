@@ -39,8 +39,19 @@ public class Mentor extends AppUser {
         this.classroomList = classroomList;
     }
 
-    public void addClassroom(Classroom classroom) {
-        this.classroomList.add(classroom);
+    public void addClassroom(Classroom classroomToAdd) {
+
+        Classroom classroomToRemove = null;
+
+        for (Classroom mentorClassroom : this.classroomList) {
+            if (mentorClassroom.getId().equals(classroomToAdd.getId())) {
+                classroomToRemove = mentorClassroom;
+            }
+        }
+        if (classroomToRemove != null) {
+            this.classroomList.remove(classroomToRemove);
+        }
+        this.classroomList.add(classroomToAdd);
     }
 
     public String toString() {
