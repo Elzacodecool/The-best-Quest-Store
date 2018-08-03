@@ -1,20 +1,16 @@
 package com.codecool.controllers;
 
-import com.codecool.model.Codecooler;
-import com.codecool.model.FactoryDAO;
-import com.codecool.model.Mentor;
-import com.sun.net.httpserver.Headers;
+import com.codecool.model.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpCookie;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MentorController implements HttpHandler {
     private Mentor mentor;
@@ -25,28 +21,181 @@ public class MentorController implements HttpHandler {
         login(httpExchange);
 
         String method = httpExchange.getRequestMethod();
-        String [] uriData = getUriData(httpExchange);
 
         if (method.equals("GET")) {
-            String response = createResponse(uriData);
-            sendResponse(httpExchange, response);
+            String response = createResponse(httpExchange);
+            Common.sendResponse(httpExchange, response);
         }
+        if (method.equals("POST")) {
+            updateData(httpExchange);
+            redirectToPreviousPage(httpExchange);
+        }
+    }
+
+    private void redirectToPreviousPage(HttpExchange httpExchange) {
+        String[] uri = getUriData(httpExchange);
+        String newLocation;
+        if (isHomePage(uri)) {
+            newLocation = "/" + uri[0];
+        } else {
+            newLocation = "/" + uri[0] + "/" + uri[1];
+        }
+        Common.redirect(httpExchange, newLocation);
+    }
+
+    private void updateData(HttpExchange httpExchange) {
+        String [] uriData = getUriData(httpExchange);
+        Map<String, String> data = Common.getDataFromRequest(httpExchange);
+
+        if (isHomePage(uriData) || isMenu(uriData)) {
+            editProfile(data);
+            return;
+        }
+
+        String title = uriData[1];
+
+        if (isAdd(uriData)) {
+            switch (title) {
+                case "codecoolers":
+                    addCodecooler(data);
+                    break;
+                case "quests":
+                    addQuest(data);
+                    break;
+                case "artifacts":
+                    addArtifact(data);
+                    break;
+            }
+        }
+        else if (isEdit(uriData)) {
+            int id = getId(uriData);
+            switch (title) {
+                case "codecoolers":
+                    editCodecooler(id, data);
+                    break;
+                case "quests":
+                    editQuest(id, data);
+                    break;
+                case "artifacts":
+                    editArtifact(id, data);
+                    break;
+            }
+        }
+    }
+
+    private void editArtifact(int id, Map<String, String> data) {
+        ArtifactDAO artifactDAO = factoryDAO.getArtifactDAO();
+        Artifact artifact = artifactDAO.get(id);
+        String name = data.get("artifact_name");
+        String description = data.get("artifact_description");
+        int cost = Integer.valueOf(data.get("cost"));
+        String category = data.get("category");
+
+        artifact.setName(name);
+        artifact.setDescription(description);
+        artifact.setCost(cost);
+        artifact.setCategory(category);
+
+        artifactDAO.update(artifact);
+    }
+
+    private void editQuest(int id, Map<String, String> data) {
+        QuestDAO questDAO = factoryDAO.getQuestDAO();
+        Quest quest = questDAO.get(id);
+        String name = data.get("quest_name");
+        String description = data.get("quest_description");
+        int prize = Integer.valueOf(data.get("prize"));
+        String category = data.get("category");
+
+        quest.setName(name);
+        quest.setDescription(description);
+        quest.setPrize(prize);
+        quest.setCategory(category);
+
+        questDAO.update(quest);
+    }
+
+    private void editCodecooler(int id, Map<String, String> data) {
+        CodecoolerDAO codecoolerDAO = factoryDAO.getCodecoolerDAO();
+        Codecooler codecooler = codecoolerDAO.get(id);
+        String lastName = data.get("last_name");
+        String password = data.get("password");
+        String email = data.get("email");
+        String classroom = data.get("classroom");
+
+        codecooler.setLastName(lastName);
+        codecooler.setPassword(password);
+        codecooler.setEmail(email);
+//        codecooler.setClassroom(new Classroom(classroom));
+
+        codecoolerDAO.update(codecooler);
+    }
+
+    private void addArtifact(Map<String, String> data) {
+        ArtifactDAO artifactDAO = factoryDAO.getArtifactDAO();
+        String name = data.get("artifact_name");
+        String description = data.get("artifact_description");
+        int cost = Integer.valueOf(data.get("cost"));
+        String category = data.get("category");
+
+        Artifact artifact = new Artifact(name, description, cost, category);
+
+        artifactDAO.add(artifact);
+
+    }
+
+    private void addQuest(Map<String, String> data) {
+        QuestDAO questDAO = factoryDAO.getQuestDAO();
+        String name = data.get("quest_name");
+        String description = data.get("quest_description");
+        int prize = Integer.valueOf(data.get("prize"));
+        String category = data.get("category");
+
+        Quest quest = new Quest(name, description, prize, category);
+
+        questDAO.add(quest);
+    }
+
+    private void addCodecooler(Map<String, String> data) {
+        String firstName = data.get("first_name");
+        String lastName = data.get("last_name");
+        String login = data.get("login");
+        String password = data.get("password");
+        String email = data.get("email");
+        String classroomName = data.get("classroom");
+        Codecooler codecooler = new Codecooler(login, password, firstName, lastName, email);
+
+        Classroom classroom = factoryDAO.getClassroomDAO().get(classroomName);
+        codecooler.setClassroom(classroom);
+        codecooler.setEarnedCoolcoins(0);
+        codecooler.setWallet(0);
+
+        factoryDAO.getCodecoolerDAO().add(codecooler);
+    }
+
+    private void editProfile(Map<String, String> data) {
+        mentor.setPassword(data.get("password"));
+        mentor.setEmail(data.get("email"));
+        factoryDAO.getMentorDAO().update(mentor);
     }
 
     private String chooseTwigFileByUri(String[] uriData) {
         final String LOGIN = "/static/templates/login_page.twig";
-        final String PROFILE = "/static/templates/mentor_profile.twig";
-        final String CODECOOLERS = "/static/templates/mentor_codecoolers.twig";
-        final String CODECOOLER = "/static/templates/mentor_one_codecooler.twig";
-        final String ARTIFACTS = "/static/templates/mentor_one_codecooler_artifacts.twig";
-        final String QUESTS = "/static/templates/mentor_one_codecooler_quests.twig";
+        final String PROFILE = "/static/templates/mentor/mentor_profile.twig";
+        final String CODECOOLERS = "/static/templates/mentor/mentor_codecoolers.twig";
+        final String CODECOOLER = "/static/templates/mentor/mentor_one_codecooler.twig";
+        final String CODECOOLER_ADD = "/static/templates/mentor/mentor_create_codecooler.twig";
+        final String ARTIFACTS = "/static/templates/mentor/mentor_artifacts.twig";
+        final String ARTIFACT = "/static/templates/mentor/mentor_one_artifact.twig";
+        final String QUESTS = "/static/templates/mentor/mentor_quests.twig";
+        final String QUEST = "/static/templates/mentor/mentor_one_quest.twig";
 
-        if (uriData.length == 1) {
+        if (isHomePage(uriData)) {
             return PROFILE;
         }
 
         String title = uriData[1];
-        if (uriData.length == 2) {
+        if (isMenu(uriData)) {
             switch (title) {
                 case "profile":
                     return PROFILE;
@@ -61,59 +210,128 @@ public class MentorController implements HttpHandler {
             }
         }
 
-        String action = uriData[2];
-        if (uriData.length == 3) {
-            if (title.equals("codecoolers") && action.equals("add")) {
-                return  CODECOOLER;
+        if (isAdd(uriData)) {
+            switch (title) {
+                case "codecoolers":
+                    return CODECOOLER_ADD;
+                case "quests":
+                    return QUEST;
+                case "artifacts":
+                    return ARTIFACT;
             }
         }
 
-        String id = uriData[3];
-        if (uriData.length == 4) {
-            if (title.equals("codecoolers") && action.equals("edit") && StringUtils.isNumeric(id)) {
-                return CODECOOLER;
+        if (isEdit(uriData)) {
+            switch (title) {
+                case "codecoolers":
+                    return CODECOOLER;
+                case "quests":
+                    return QUEST;
+                case "artifacts":
+                    return ARTIFACT;
+            }
+        }
+
+        if (isListItems(uriData)) {
+            String item = uriData[2];
+            if (item.equals("quests")) {
+                return QUESTS;
+            } else if (item.equals("artifacts")) {
+                return ARTIFACTS;
             }
         }
 
         return LOGIN;
     }
 
+    private boolean isListItems(String[] uriData) {
+        return uriData.length == 4 && uriData[1].equals("codecoolers");
+    }
+
+    private boolean isHomePage(String [] uriData) {
+        return uriData.length == 1;
+    }
+
+    private boolean isMenu(String [] uriData) {
+        return uriData.length == 2;
+    }
+
+    private boolean isAdd(String [] uriData) {
+        String action = uriData[2];
+        return uriData.length == 3 && action.equals("add");
+    }
+
+    private boolean isEdit(String [] uriData) {
+        if (uriData.length != 4) {
+            return false;
+        }
+        String action = uriData[2];
+        String id = uriData[3];
+        return action.equals("edit") && StringUtils.isNumeric(id);
+    }
+
     private String [] getUriData(HttpExchange httpExchange) {
         String [] uriData = httpExchange.getRequestURI().toString().split("/");
         String [] correctUri = new String [uriData.length - 1];
         if (uriData.length - 1 >= 0) System.arraycopy(uriData, 1, correctUri, 0, uriData.length - 1);
-        for (String uri : correctUri) {
-            System.out.println("-" + uri);
-        }
         return correctUri;
     }
 
-    private void sendResponse(HttpExchange httpExchange, String response) throws IOException {
-        httpExchange.sendResponseHeaders(200, response.length());
-        OutputStream os = httpExchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-    }
 
-    private String createResponse(String [] uridata) {
-        String filepath = chooseTwigFileByUri(uridata);
-        JtwigModel jtwigModel = JtwigModel.newModel();
-        jtwigModel.with("mentor", mentor);
-        List<Codecooler> codecoolers = factoryDAO.getCodecoolerDAO().getList();
-        jtwigModel.with("codecoolers", codecoolers);
-        if (uridata.length == 4) {
-            System.out.println("send codecooler to twig");
-            jtwigModel.with("codecooler", codecoolers.get(0));
-        }
+
+    private String createResponse(HttpExchange httpExchange) {
+        String [] uriData = getUriData(httpExchange);
+        String filepath = chooseTwigFileByUri(uriData);
+        JtwigModel jtwigModel = getJtwigModel(uriData);
         JtwigTemplate jtwigTemplate = JtwigTemplate.classpathTemplate(filepath);
         return jtwigTemplate.render(jtwigModel);
     }
 
-    private void login(HttpExchange httpExchange) {
-        if (mentor != null) {
-            return;
+    private JtwigModel getJtwigModel(String[] uridata) {
+        CodecoolerDAO codecoolerDAO = factoryDAO.getCodecoolerDAO();
+        QuestDAO questDAO = factoryDAO.getQuestDAO();
+        ArtifactDAO artifactDAO = factoryDAO.getArtifactDAO();
+        List<Codecooler> codecoolers = codecoolerDAO.getList();
+        List<Quest> quests = questDAO.getList();
+        List<Artifact> artifacts = artifactDAO.getList();
+        JtwigModel jtwigModel = JtwigModel.newModel();
+
+        jtwigModel.with("mentor", mentor);
+        if (isMenu(uridata)) {
+            jtwigModel.with("codecoolers", codecoolers);
+            jtwigModel.with("quests", quests);
+            jtwigModel.with("artifacts", artifacts);
+        } else {
+            jtwigModel.with("codecoolers", new ArrayList<String>());
+            jtwigModel.with("quests", new ArrayList<String>());
+            jtwigModel.with("artifacts", new ArrayList<String>());
         }
-        String login = getLogin(getCookie(httpExchange));
+
+        if (isEdit(uridata)) {
+            String title = uridata[1];
+            int id = getId(uridata);
+            switch (title) {
+                case "codecoolers":
+                    jtwigModel.with("codecooler", codecoolerDAO.get(id));
+                    break;
+                case "quests":
+                    jtwigModel.with("quest", questDAO.get(id));
+                    break;
+                case "artifacts":
+                    jtwigModel.with("artifact", artifactDAO.get(id));
+                    break;
+            }
+        }
+
+        return jtwigModel;
+    }
+
+    private int getId(String[] uridata) {
+        return Integer.valueOf(uridata[3]);
+    }
+
+    private void login(HttpExchange httpExchange) {
+        String login = Common.getLogin(Common.getCookie(httpExchange));
         List<Mentor> mentors = factoryDAO.getMentorDAO().getList();
         for (Mentor mentor : mentors) {
             if (mentor.getLogin().equals(login)) {
@@ -121,34 +339,6 @@ public class MentorController implements HttpHandler {
                 return;
             }
         }
-        redirect(httpExchange, "login");
-    }
-
-    private HttpCookie getCookie(HttpExchange httpExchange) {
-        String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
-        HttpCookie cookie;
-
-        if (cookieStr != null) {  // Cookie already exists
-            cookie = HttpCookie.parse(cookieStr).get(0);
-        } else { // Create a new cookie
-            cookie = null;
-            redirect(httpExchange, "login");
-        }
-        return cookie;
-    }
-
-    private String getLogin(HttpCookie cookie) {
-        return cookie.toString().split("=")[1];
-    }
-
-    private void redirect(HttpExchange httpExchange, String location) {
-        Headers headers = httpExchange.getResponseHeaders();
-        headers.add("Location", location);
-        try {
-            httpExchange.sendResponseHeaders(302, -1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        httpExchange.close();
+        Common.redirect(httpExchange, "login");
     }
 }

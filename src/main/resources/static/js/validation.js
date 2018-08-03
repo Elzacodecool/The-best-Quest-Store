@@ -18,6 +18,7 @@ function isPasswordInputFullfill(){
 }
 
 function validateLogin(){
+        window.alert("validation login");
     var button =  document.getElementById("loginButton");
     if(isLoginInputFullfill() && isPasswordInputFullfill() ){
         button.disabled = false;
@@ -36,7 +37,7 @@ function isLastNameInputProfileFullfill(){
 }
 // admin profile validation
 function isPasswordProfileInputFullfill(){
-    if(document.getElementByName("password").value !=""){
+    if(document.getElementById("passwordProfile").value !=""){
         return true;
     }
     else{
@@ -45,7 +46,7 @@ function isPasswordProfileInputFullfill(){
 }
 
 function isEmailInputFullfill(){
-    if(document.getElementByName("email").value !=""){
+    if(document.getElementById("emailProfile").value !=""){
         return true;
     }
     else{
@@ -64,7 +65,7 @@ function validateAdminProfile(){
 
 // degree inputs validation
 function isDegreeNameInputFullfill(){
-    if(document.getElementByName("degreeName").value !=""){
+    if(document.getElementById("nameDegrees").value !=""){
         return true;
     }
     else{
@@ -73,7 +74,7 @@ function isDegreeNameInputFullfill(){
 }
 
 function isMinCoolcoinsInputFullfill(){
-    if(document.getElementByName("minCoolcoins").value !=""){
+    if(document.getElementById("minCoolcoinsDegrees").value !=""){
         return true;
     }
     else{
@@ -90,7 +91,7 @@ function validateDegree(){
 
 //class inputs validation
 function isClassNameInputFullfill(){
-    if(document.getElementByName("className").value !=""){
+    if(document.getElementById("nameClasses").value !=""){
         return true;
     }
     else{
@@ -104,67 +105,21 @@ function validateClass(){
         button.disabled = false;
     }
 }
-//////////
-
 
 //koniec
-function isNameInputFullfill(){
-    if(document.getElementById("nameInput").value !=""){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-function isEmailInputFullfill(){
-    if(document.getElementById("emailInput").value !=""){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-function isTextInputFullfill(){
-    if(document.getElementById("textInput").value !=""){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-function enableSendButton(){
-    var button =  document.getElementById("sendButton");
-    if(isNameInputFullfill() && isEmailInputFullfill() && isTextInputFullfill()){
-        button.disabled = false;
-    }
-    else if(isNameInputFullfill() || isEmailInputFullfill() || isTextInputFullfill()){
-        button.disabled = true;
-    }
-}
-
-
-
 function validateEmail(){
-    var notOnlyWhiteSpaces = new RegExp("^\s*$");
-    var correctEmail = new RegExp("^[\S]+@[\S]+[\.][\S]+");
-    
-    var emailInput = document.getElementById("emailInput").value; //nie działa
+    var correctEmail = new RegExp(".@.");
+    var emailInput = document.getElementById("emailProfile").value;
+
+    var button =  document.getElementById("changeAdminProfileButton");
+
 
     if(!correctEmail.test(emailInput)){
-        alert("Incorrect email address.");
+        button.disabled="true";
     }
     else{
-        if(notOnlyWhiteSpaces.test(emailInput)){                  // nie działa
-            alert("Email: Put some signs here man.");
-        }
-        else{
-            return true;
-        }
+        button.disabled="false";
     }
-    return false;
 }
 
 function validateFields(){

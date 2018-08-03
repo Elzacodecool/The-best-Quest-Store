@@ -12,8 +12,7 @@
 </head>
 
 <body>
-    <script src="/validation.js"></script>
-
+    <script src="/static/js/validation.js"></script>
     <nav class="navbar">
         <div class="navbar-store">
         <img class="navbar-logo" src="/static/images/logo.png" alt="Logo Codecool">
@@ -41,7 +40,7 @@
             </a> 	
         </li>
         <li>
-            <a href="/login">
+            <a href="/logout">
                 <img class="navbar-logout" src="/static/images/logout.png" alt="Logout" title="Press to logout">
             </a>
         </li>
@@ -75,7 +74,7 @@
         </form>
     </div>
     <div class="under-form-div">
-            <a class="under-table-a" href="/admin/mentors/admin_one_mentor/{{ mentor.getId() }}/admin_one_mentor_codecoolers">
+            <a class="under-table-a" href="/admin/mentors/edit/{{ mentor.getId() }}/codecoolers">
                 <img class="under-table-img round-img" src="/static/images/codecooler.png" alt="Mentor's codecoolers" title="Mentor's codecoolers"></a>
     </div> 
 </div> 

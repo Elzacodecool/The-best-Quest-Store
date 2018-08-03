@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 public class AdminController implements HttpHandler {
-
     private FactoryDAO factoryDAO = new FactoryDAO();
 
     private List<Mentor> mentors= new ArrayList<>();
@@ -88,7 +87,7 @@ public class AdminController implements HttpHandler {
             response = getResponse("/static/templates/admins/admin_one_mentor.twig", getOneMentorModel(Integer.parseInt(uri[4])));
         }
         else if(uri.length==6){
-            response = getResponse("/static/templates/admins/admin_one_mentor_codecoolers.twig", getOneMentorModel(Integer.parseInt(uri[4]))); // Z TEGO MENTORA TRZEBA JESZCZE WYCIAGNAC LISTE CODECOOLERSÓW
+            response = getResponse("/static/templates/admins/admin_one_mentor_codecoolers.twig", getOneMentorModel(Integer.parseInt(uri[4])));
         }
     }
 
@@ -330,9 +329,6 @@ public class AdminController implements HttpHandler {
 
     // Loging
     private void login(HttpExchange httpExchange) {
-        if (admin != null) {
-            return;
-        }
         loadAppUsersFromDAO();
         login = getLogin(getCookie(httpExchange));
 
