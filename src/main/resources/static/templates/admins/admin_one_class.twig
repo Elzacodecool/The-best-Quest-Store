@@ -51,7 +51,7 @@
             <div>
                 <h2>{{ classroom.getName() }}</h2>
                 <p class="nameinput">Name:</p>
-                <input class="profilebox" type="text" name="className" id="nameClasses" value="{{ classroom.getName() }}" onchange="validateClass()">
+                <input class="profilebox" type="text" name="className" id="nameClasses" value="{{ classroom.getName() }}" onkeyup="validateClass()">
             </div>
             <div>
                 <input class="submitbutton" type="submit" value="Save changes" id="changeClassButton" disabled="disabled">

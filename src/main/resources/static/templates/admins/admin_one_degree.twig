@@ -51,11 +51,11 @@
             <div>
                 <h2>{{ degree.getName() }}</h2>
                 <p class="nameinput">Name:</p>
-                <input class="profilebox" type="text" name="degreeName" id="nameDegrees" value="{{ degree.getName() }}" onchange="validateDegree()" >
+                <input class="profilebox" type="text" name="degreeName" id="nameDegrees" value="{{ degree.getName() }}" onkeyup="validateDegree()" >
             </div>
             <div>
                 <p class="nameinput"> Minimum coolcoins:</p>
-                <input class="profilebox" type="text" name="minCoolcoins" id="minCoolcoinsDegrees" value="{{ degree.getMinEarnedCoolcoins() }}" onchange="validateDegree()">
+                <input class="profilebox" type="text" name="minCoolcoins" id="minCoolcoinsDegrees" value="{{ degree.getMinEarnedCoolcoins() }}" onkeyup="validateDegree()">
             </div>
             <div>
                 <input class="submitbutton" type="submit" value="Save changes" id="changeDegreeButton" disabled="disabled">

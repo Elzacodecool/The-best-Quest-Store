@@ -54,11 +54,11 @@
             <div id="topcontent">
                 <h2>{{ admin.getFirstName()}} {{ admin.getLastName() }}</h2>
                 <p class="nameinput"> Password:</p>
-                <input class="profilebox" type="text" name="password" id="passwordProfile" value="{{ admin.getPassword() }}" onchange="validateAdminProfile()">
+                <input class="profilebox" type="text" name="password" id="passwordProfile" value="{{ admin.getPassword() }}" onkeyup="validateAdminProfile()">
             </div>
             <div>
                 <p class="nameinput">Email:</p>
-                    <input class="profilebox" type="text" name="email" id="emailProfile" value="{{ admin.getEmail() }}" onchange="validateAdminProfile()">
+                    <input class="profilebox" type="text" name="email" id="emailProfile" value="{{ admin.getEmail() }}" onkeyup="validateAdminProfile()">
             </div>
             <div>
                 <input class="submitbutton" type="submit" value="Save changes" id="changeAdminProfileButton" disabled="disabled">
