@@ -61,8 +61,8 @@
 			{% for class in classrooms %}
 		            <tr>
 		                <td>{{ class.getName() }}</td>
-		                <td>{{ class.getK() }}</td>
-		                <td>{{ class.getL() }}</td>
+		                <td>{{ class.getAmountOfMentors() }}</td>
+		                <td>{{ class.getAmountOfCodecoolers() }}</td>
 		                <td>
 		                    <a href="/admin/classes/edit/{{ class.getId() }}"><img class="table-img" src="/static/images/edit.png" alt="View/Edit" title="View/Edit class"></a></td>
 		            </tr>

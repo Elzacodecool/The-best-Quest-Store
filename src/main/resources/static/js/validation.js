@@ -18,7 +18,6 @@ function isPasswordInputFullfill(){
 }
 
 function validateLogin(){
-        window.alert("validation login");
     var button =  document.getElementById("loginButton");
     if(isLoginInputFullfill() && isPasswordInputFullfill() ){
         button.disabled = false;
