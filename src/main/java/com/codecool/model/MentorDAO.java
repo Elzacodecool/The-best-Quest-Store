@@ -2,6 +2,7 @@ package com.codecool.model;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,21 @@ public class MentorDAO extends CommonDAO {
 
     public int update(Mentor mentor) {
 
+        // update mentor_classroom
+        String sqlDelete = "DELETE FROM mentor_classroom WHERE mentor_id = ?;";
+        String sqlInsert = "INSERT INTO mentor_classroom (mentor_id, classroom_id) VALUES (?, ?);";
+
+        Map<Integer, Object> mentorClassroom = new HashMap<>();
+        mentorClassroom.put(1, mentor.getId());
+
+        executeSQLUpdateDB(connection, sqlDelete, mentorClassroom);
+
+        for (Classroom classroom : mentor.getClassroomList()) {
+            mentorClassroom.put(2, classroom.getId());                        
+            executeSQLUpdateDB(connection, sqlInsert, mentorClassroom);
+        }
+
+        // update appuser
         return appUserDAO.update(mentor);
     }
 
