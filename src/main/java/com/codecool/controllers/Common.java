@@ -59,7 +59,7 @@ final class Common {
         return null;
     }
 
-    static HttpCookie getCookie(HttpExchange httpExchange) {
+    public static HttpCookie getCookie(HttpExchange httpExchange) {
         String cookieStr = httpExchange.getRequestHeaders().getFirst("Cookie");
         HttpCookie cookie;
 
