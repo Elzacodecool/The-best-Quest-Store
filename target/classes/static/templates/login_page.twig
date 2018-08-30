@@ -23,10 +23,10 @@
         <form method="post" class="flexbox-container">
                 <img src="/static/images/avatar.png" class="avatar">
                 <div>
-                    <input class="loginbox" type="text" name="login" placeholder=" Username" id="loginInput" value="" onchange="validateLogin()">
+                    <input class="loginbox" type="text" name="login" placeholder=" Username" id="loginInput" value="" onkeyup="validateLogin()">
                 </div>
                 <div>
-                    <input class="loginbox" type="password" name="password" placeholder=" Password" id="passwordInput" value="" onchange="validateLogin()">
+                    <input class="loginbox" type="password" name="password" placeholder=" Password" id="passwordInput" value="" onkeyup="validateLogin()">
                 </div>
                 <div>
                     <input class="submitbutton" type="submit" value="Log in" id="loginButton" disabled="disabled">
